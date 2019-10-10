@@ -1,6 +1,7 @@
-const mainBtn = document.querySelector('#btn');
+const geoBtn = document.querySelector('#geo_btn');
+const vibBtn = document.querySelector('#vib_btn');
 
-mainBtn.addEventListener('click', () => {
+geoBtn.addEventListener('click', () => {
     function havePosition(pos) {
         console.log(`x: ${pos.coords.latitude}`);
         console.log(`y: ${pos.coords.longitude}`);
@@ -19,4 +20,8 @@ mainBtn.addEventListener('click', () => {
     };
 
     navigator.geolocation.getCurrentPosition(havePosition, noPosition, options);
+});
+
+vibBtn.addEventListener('click', () => {
+    navigator.vibrate(2000);
 })
