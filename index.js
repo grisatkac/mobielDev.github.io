@@ -1,13 +1,13 @@
 const geoBtn = document.querySelector('#geo_btn');
-const devPos = document.querySelector('#devicePos_btn');
+const devPos = document.querySelector('#devPos');
 
 devPos.addEventListener('deviceorientation', (event) => {
     /*console.log(`absolute: ${event.absolute}`);
     console.log(`apha: ${event.alpha}`)*/
-    document.querySelector('#absolute').innerHTML = `absolute: ${event.absolute}`;
-    document.querySelector('#alpha').innerHTML = `alpha: ${event.alpha}`;
-    document.querySelector('#beta').innerHTML = `beta: ${event.beta}`;
-    document.querySelector('#gamma').innerHTML = `gamma: ${event.gamma}`;
+    document.querySelector('#absolute').innerHTML = `absolute: ${event.absolute} \n`;
+    document.querySelector('#alpha').innerHTML = `alpha: ${event.alpha} \n`;
+    document.querySelector('#beta').innerHTML = `beta: ${event.beta} \n`;
+    document.querySelector('#gamma').innerHTML = `gamma: ${event.gamma} \n`;
 });
 
 geoBtn.addEventListener('click', () => {
