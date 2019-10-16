@@ -35,7 +35,3 @@ geoBtn.addEventListener('click', () => {
         console.log('navigation in not avaible');
     }
 });
-
-
-
-
