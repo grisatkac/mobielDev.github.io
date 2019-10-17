@@ -1,7 +1,7 @@
 const geoBtn = document.querySelector('#geo_btn');
 const devPos = document.querySelector('#devPos');
 
-devPos.addEventListener('deviceorientation', (event) => {
+window.addEventListener('deviceorientation', (event) => {
     /*console.log(`absolute: ${event.absolute}`);
     console.log(`apha: ${event.alpha}`)*/
     document.querySelector('#absolute').innerHTML = `absolute: ${event.absolute} \n`;
