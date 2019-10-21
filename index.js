@@ -15,6 +15,10 @@ window.addEventListener('devicemotion', (event) => {
     console.log(`ускорение по осям: ${event.accelerationIncludingGravity}`);
     console.log(`скорость изменени по осям: ${event.rotationRate}`);
     console.log(`время получения с устройства: ${event.interval}`);
+    document.querySelector('#motion1').innerHTML = `ускорение: ${event.acceleration} \n`;
+    document.querySelector('#motion2').innerHTML = `ускорение по осям: ${event.accelerationIncludingGravity} \n`;
+    document.querySelector('#motion3').innerHTML = `скорость изменени по осям: ${event.rotationRate} \n`;
+    document.querySelector('#motion4').innerHTML = `время получения с устройства: ${event.interval} \n`;
 });
 
 geoBtn.addEventListener('click', () => {
