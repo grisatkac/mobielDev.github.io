@@ -11,10 +11,14 @@ window.addEventListener('deviceorientation', (event) => {
 });
 
 window.addEventListener('devicemotion', (event) => {
-    console.log(`ускорение: ${event.acceleration}`);
-    console.log(`ускорение по осям: ${event.accelerationIncludingGravity}`);
-    console.log(`скорость изменени по осям: ${event.rotationRate}`);
-    console.log(`время получения с устройства: ${event.interval}`);
+    console.log(`ускорение: `);
+    console.log(event.acceleration);
+    console.log(`ускорение по осям: `);
+    console.log(event.accelerationIncludingGravity);
+    console.log(`скорость изменени по осям: `);
+    console.log(event.rotationRate);
+    console.log(`время получения с устройства: `);
+    console.log(event.interval);
     document.querySelector('#motion1').innerHTML = `ускорение: ${event.acceleration} \n`;
     document.querySelector('#motion2').innerHTML = `ускорение по осям: ${event.accelerationIncludingGravity} \n`;
     document.querySelector('#motion3').innerHTML = `скорость изменени по осям: ${event.rotationRate} \n`;
