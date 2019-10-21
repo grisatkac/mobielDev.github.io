@@ -19,9 +19,12 @@ window.addEventListener('devicemotion', (event) => {
     console.log(event.rotationRate);
     console.log(`время получения с устройства: `);
     console.log(event.interval);
-    document.querySelector('#motion1').innerHTML = `ускорение: ${event.acceleration} \n`;
-    document.querySelector('#motion2').innerHTML = `ускорение по осям: ${event.accelerationIncludingGravity} \n`;
-    document.querySelector('#motion3').innerHTML = `скорость изменени по осям: ${event.rotationRate} \n`;
+    document.querySelector('#motion1').innerHTML = `ускорение: ${event.acceleration.x}, 
+    ${event.acceleration.y}, ${event.acceleration.z} \n`;
+    document.querySelector('#motion2').innerHTML = `ускорение по осям: ${event.accelerationIncludingGravity.x},
+    ${event.acceleration.y}, ${event.acceleration.z} \n`;
+    document.querySelector('#motion3').innerHTML = `скорость изменени по осям: ${event.rotationRate.alpha},
+    ${event.rotationRate.beta}, ${event.rotationRate.gamma} \n`;
     document.querySelector('#motion4').innerHTML = `время получения с устройства: ${event.interval} \n`;
 });
 
