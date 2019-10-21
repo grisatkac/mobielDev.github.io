@@ -1,7 +1,6 @@
 const geoBtn = document.querySelector('#geo_btn');
 const devPos = document.querySelector('#devPos');
 
-
 window.addEventListener('deviceorientation', (event) => {
     /*console.log(`absolute: ${event.absolute}`);
     console.log(`apha: ${event.alpha}`)*/
@@ -9,6 +8,13 @@ window.addEventListener('deviceorientation', (event) => {
     document.querySelector('#alpha').innerHTML = `alpha: ${event.alpha} \n`;
     document.querySelector('#beta').innerHTML = `beta: ${event.beta} \n`;
     document.querySelector('#gamma').innerHTML = `gamma: ${event.gamma} \n`;
+});
+
+window.addEventListener('devicemotion', (event) => {
+    console.log(`ускорение: ${event.acceleration}`);
+    console.log(`ускорение по осям: ${event.accelerationIncludingGravity}`);
+    console.log(`скорость изменени по осям: ${event.rotationRate}`);
+    console.log(`время получения с устройства: ${event.interval}`);
 });
 
 geoBtn.addEventListener('click', () => {
