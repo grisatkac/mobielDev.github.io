@@ -63,6 +63,7 @@ if('Accelerometr' in window) {
         console.log(`acceleration X:  ${e.x} `);
         console.log(`acceleration y: ${e.y}`);
         console.log(`acceleration z: ${e.z}`);
+        accelerometr.innerHTML =  'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
     })
     
     AcceSensor.start();
