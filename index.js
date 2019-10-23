@@ -1,15 +1,15 @@
 const geoBtn = document.querySelector('#geo_btn');
 const devPos = document.querySelector('#devPos');
-
+/*
 window.addEventListener('deviceorientation', (event) => {
-    /*console.log(`absolute: ${event.absolute}`);
-    console.log(`apha: ${event.alpha}`)*/
+    console.log(`absolute: ${event.absolute}`);
+    console.log(`apha: ${event.alpha}`)
     document.querySelector('#absolute').innerHTML = `absolute: ${event.absolute} \n`;
     document.querySelector('#alpha').innerHTML = `alpha: ${event.alpha} \n`;
     document.querySelector('#beta').innerHTML = `beta: ${event.beta} \n`;
     document.querySelector('#gamma').innerHTML = `gamma: ${event.gamma} \n`;
-});
-
+});*/
+/*
 window.addEventListener('devicemotion', (event) => {
     console.log(`ускорение: `);
     console.log(event.acceleration);
@@ -51,4 +51,33 @@ geoBtn.addEventListener('click', () => {
     }else {
         console.log('navigation in not avaible');
     }
-});
+});*/
+
+
+const AcceBtn = document.getElementById('accelerometr');
+
+
+if('Accelerometr' in window) {
+    const AcceSensor = new Accelerometer({frequency: 60});
+    AcceSensor.addEventListener('reading', (event) => {
+        console.log(`acceleration X:  ${e.x} `);
+        console.log(`acceleration y: ${e.y}`);
+        console.log(`acceleration z: ${e.z}`);
+    })
+    
+    AcceSensor.start();
+
+}else {
+    console.log('dont have acceleration sensor');
+}
+
+let status = document.getElementById('status');
+if ( 'Accelerometer' in window ) {
+  let sensor = new Accelerometer();
+  sensor.addEventListener('reading', function(e) {
+    status.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
+  });
+  sensor.start();
+}
+else status.innerHTML = 'Accelerometer not supported';
+
