@@ -54,19 +54,13 @@ geoBtn.addEventListener('click', () => {
 });*/
 
 
-const AcceBtn = document.getElementById('accelerometr');
-
+let AcceBtn = document.getElementById('accelerometr');
 if('Accelerometer' in window) {
-    const AcceSensor = new Accelerometer();
+    let AcceSensor = new Accelerometer();
     AcceSensor.addEventListener('reading', (e) => {
-        console.log(`acceleration X:  ${e.x} `);
-        console.log(`acceleration y: ${e.y}`);
-        console.log(`acceleration z: ${e.z}`);
         accelerometr.innerHTML =  'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
-    })
-    
+    });
     AcceSensor.start();
-
 }else {
     console.log('dont have acceleration sensor');
 }
@@ -92,3 +86,12 @@ if( 'Gyroscope' in window) {
     gyroDiv.innerHTML = 'Gyroscope not supported'
 }
 
+let statusGyro = document.getElementById('statusGyro');
+if ( 'Gyroscope' in window ) {
+  let sensorGyro = new Gyroscope();
+  sensorGyro.addEventListener('reading', function(e) {
+    statusGyro.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
+  });
+  sensorGyro.start();
+}
+else statusGyro.innerHTML = 'Gyroscope not supported';
