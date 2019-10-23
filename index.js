@@ -57,7 +57,7 @@ geoBtn.addEventListener('click', () => {
 const AcceBtn = document.getElementById('accelerometr');
 
 if('Accelerometer' in window) {
-    const AcceSensor = new Accelerometer({frequency: 60});
+    const AcceSensor = new Accelerometer();
     AcceSensor.addEventListener('reading', (e) => {
         console.log(`acceleration X:  ${e.x} `);
         console.log(`acceleration y: ${e.y}`);
@@ -85,7 +85,7 @@ let gyroDiv = document.getElementById('gyroscope');
 if( 'Gyroscope' in window) {
     let gyroSensor = new Gyroscope();
     gyroSensor.addEventListener('reading', (event) => {
-        gyroDiv.innerHTML = `x: ${event.x}, y: ${event.y}, z: ${event.z};`
+        gyroDiv.innerHTML = `x: ${event.target.x}, y: ${event.target.y}, z: ${event.target.z};`
     });
     gyroSensor.start();
 } else {
