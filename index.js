@@ -56,8 +56,7 @@ geoBtn.addEventListener('click', () => {
 
 const AcceBtn = document.getElementById('accelerometr');
 
-
-if('Accelerometr' in window) {
+if('Accelerometer' in window) {
     const AcceSensor = new Accelerometer({frequency: 60});
     AcceSensor.addEventListener('reading', (event) => {
         console.log(`acceleration X:  ${e.x} `);
@@ -81,4 +80,15 @@ if ( 'Accelerometer' in window ) {
   sensor.start();
 }
 else status.innerHTML = 'Accelerometer not supported';
+
+let gyroDiv = document.getElementById('gyroscope');
+if( 'Gyroscope' in window) {
+    let gyroSensor = new Gyroscope();
+    gyroSensor.addEventListener('reading', (event) => {
+        gyroDiv.innerHTML = `x: ${event.x}, y: ${event.y}, z: ${event.z};`
+    });
+    gyroSensor.start();
+} else {
+    gyroDiv.innerHTML = 'Gyroscope not supported'
+}
 
