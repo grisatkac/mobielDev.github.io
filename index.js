@@ -58,7 +58,7 @@ const AcceBtn = document.getElementById('accelerometr');
 
 if('Accelerometer' in window) {
     const AcceSensor = new Accelerometer({frequency: 60});
-    AcceSensor.addEventListener('reading', (event) => {
+    AcceSensor.addEventListener('reading', (e) => {
         console.log(`acceleration X:  ${e.x} `);
         console.log(`acceleration y: ${e.y}`);
         console.log(`acceleration z: ${e.z}`);
