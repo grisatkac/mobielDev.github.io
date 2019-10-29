@@ -75,16 +75,6 @@ if ( 'Accelerometer' in window ) {
 }
 else status.innerHTML = 'Accelerometer not supported';
 
-let gyroDiv = document.getElementById('gyroscope');
-if( 'Gyroscope' in window) {
-    let gyroSensor = new Gyroscope();
-    gyroSensor.addEventListener('reading', (event) => {
-        gyroDiv.innerHTML = `x: ${event.target.x}, y: ${event.target.y}, z: ${event.target.z};`
-    });
-    gyroSensor.start();
-} else {
-    gyroDiv.innerHTML = 'Gyroscope not supported'
-}
 
 let statusGyro = document.getElementById('statusGyro');
 if ( 'Gyroscope' in window ) {
@@ -95,3 +85,16 @@ if ( 'Gyroscope' in window ) {
   sensorGyro.start();
 }
 else statusGyro.innerHTML = 'Gyroscope not supported';
+
+if( 'AmbientLightSensor' in window ) {
+    let sensorLight = new AmbientLightSensor();
+    sensorLight.addEventListener('reading', (event) => {
+        console.log('object light: ');
+        console.log(event);
+        console.log('Current light level:', sensor.illuminance);
+    });
+    sensorLight.onerror = (event) => {
+        console.log(event.error.name, event.message);
+    }
+    sensorLight.start();
+}
