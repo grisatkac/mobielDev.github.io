@@ -89,11 +89,11 @@ else statusGyro.innerHTML = 'Gyroscope not supported';
 let statusLight = document.getElementById('lightSensor');
 if( 'AmbientLightSensor' in window ) {
     let sensorLight = new AmbientLightSensor();
-    sensorLight.addEventListener('reading', (event) => {
+    sensorLight.addEventListener('reading', (e) => {
         console.log('object light: ');
-        console.log(event);
-        console.log('Current light level:', sensor.illuminance);
-        statusLight.innerHTML = `Current light level: ${sensor.illuminance}`;
+        console.log(e);
+        console.log('Current light level:', e.target.illuminance);
+        statusLight.innerHTML = `Current light level: ${e.target.illuminance}`;
     });
     sensorLight.onerror = (event) => {
         console.log(event.error.name, event.message);
