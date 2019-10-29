@@ -97,4 +97,6 @@ if( 'AmbientLightSensor' in window ) {
         console.log(event.error.name, event.message);
     }
     sensorLight.start();
+} else {
+    console.log('light sensor not support');
 }
