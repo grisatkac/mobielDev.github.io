@@ -93,9 +93,8 @@ if( 'AmbientLightSensor' in window ) {
         console.log('object light: ');
         console.log(e);
         console.log('Current light level:', e.target.illuminance);
-        statusLight.innerHTML = `Current light level: ${e.target.illuminance}
-                                Current rgb value: ${e.target.illuminance.map(0, 500, 0, 255)}`;
-
+        statusLight.innerHTML = `Current light level: ${e.target.illuminance}`;
+        
     });
     sensorLight.onerror = (event) => {
         console.log(event.error.name, event.message);
