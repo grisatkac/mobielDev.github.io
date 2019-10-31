@@ -93,7 +93,7 @@ let convertLux = (lux ,minLux, maxLux, minRGB, maxRGB) => {
 }
 
 let statusLight = document.getElementById('lightSensor');
-if( 'AmbientLightSensor' in window ) {
+/* if( 'AmbientLightSensor' in window ) {
     let sensorLight = new AmbientLightSensor();
     sensorLight.addEventListener('reading', (e) => {
         let currIlluminance = e.target.illuminance,
@@ -106,7 +106,7 @@ if( 'AmbientLightSensor' in window ) {
     sensorLight.start();
 } else {
     document.getElementById('lightSensor').innerHTML = 'Light sensor not support';
-}
+}*/
 
 let statusCompas = document.getElementById('statusCompas');
 if('AbsoluteOrientationSensor' in window) {
