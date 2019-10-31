@@ -1,5 +1,6 @@
 const geoBtn = document.querySelector('#geo_btn');
 const devPos = document.querySelector('#devPos');
+
 /*
 window.addEventListener('deviceorientation', (event) => {
     console.log(`absolute: ${event.absolute}`);
@@ -96,7 +97,9 @@ if( 'AmbientLightSensor' in window ) {
         console.log('Current light level:', e.target.illuminance);
         statusLight.innerHTML = `Current light level: ${e.target.illuminance}, typeof: ${typeof e.target.illuminance}`;
         statusRGB.innerHTML = `Current rgb value: ${e.target.illuminance.map(0, 500, 0, 255)}, typeof: ${typeof e.target.illuminance}`;
-
+        if ( e.target.illuminance < 10 ) {
+            document.body.style.backgroundColor = 'gray';
+        }
     });
     sensorLight.start();
 } else {
