@@ -110,6 +110,7 @@ let statusLight = document.getElementById('lightSensor');
 
 let statusCompas = document.getElementById('statusCompas');
 if('AbsoluteOrientationSensor' in window) {
+    alert('absolute is ok');
     let sensorAbsoluteOrientation = new AbsoluteOrientationSensor();
     sensorAbsoluteOrientation.addEventListener('reading', (e) => {
         let q = e.target.quaternion,
@@ -119,7 +120,6 @@ if('AbsoluteOrientationSensor' in window) {
         statusText += `adjusted degrees: ${degree}`;
         statusCompas.innerHTML= statusText;
     });
-
 } else {
     statusCompas.innerHTML = `absoluteOrientation sensor not support`;
 }
