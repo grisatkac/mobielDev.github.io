@@ -120,7 +120,7 @@ if('AbsoluteOrientationSensor' in window) {
         statusText += `adjusted degrees: ${degree}`;
         statusCompas.innerHTML= statusText;
     });
-    sensor.start();
+    sensorAbsoluteOrientation.start();
 } else {
     statusCompas.innerHTML = `absoluteOrientation sensor not support`;
 }
