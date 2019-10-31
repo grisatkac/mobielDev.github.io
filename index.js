@@ -88,20 +88,25 @@ if ( 'Gyroscope' in window ) {
 }
 else statusGyro.innerHTML = 'Gyroscope not supported';
 
+let convertLux = (lux ,minLux, maxLux, minRGB, maxRGB) => {
+    return (lux - minLux) * (maxRGB - minRGB) / (maxLux - minLux) + minRGB;
+    (this - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
 let statusLight = document.getElementById('lightSensor');
-let statusRGB = document.getElementById('rgbValue');
 if( 'AmbientLightSensor' in window ) {
     let sensorLight = new AmbientLightSensor();
     sensorLight.addEventListener('reading', (e) => {
-        console.log('object light: ');
-        console.log(e);
-        console.log('Current light level:', e.target.illuminance);
-        statusLight.innerHTML = `Current light level: ${e.target.illuminance}, typeof: ${typeof e.target.illuminance}`;
-        /*statusRGB.innerHTML = `Current rgb value: ${e.target.illuminance.map(0, 500, 0, 255)}, typeof: ${typeof e.target.illuminance}`;*/
-        if ( e.target.illuminance < 10 ) {
+        let currIlluminance = e.target.illuminance,
+            rgbIlluminance;
+
+        statusLight.innerHTML = `Current light level: ${currIlluminance}`;
+        rgbIlluminance = convertLux(currIlluminance, 0, 500, 0, 255);
+        document.body.style.backgroundColor = `rgb(${rgbIlluminance}, ${rgbIlluminance}, ${rgbIlluminance})`;
+        /* if ( e.target.illuminance < 10 ) {
             document.body.style.backgroundColor = 'gray';
             alert('illuminance less than 10');
-        }
+        } */
     });
     sensorLight.start();
 } else {
