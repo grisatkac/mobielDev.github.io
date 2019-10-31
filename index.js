@@ -103,12 +103,8 @@ if( 'AmbientLightSensor' in window ) {
         statusLight.innerHTML = `Current light level: ${currIlluminance}`;
         rgbIlluminance = convertLux(currIlluminance, 0, 500, 0, 255);
         document.body.style.backgroundColor = `rgb(${rgbIlluminance}, ${rgbIlluminance}, ${rgbIlluminance})`;
-        /* if ( e.target.illuminance < 10 ) {
-            document.body.style.backgroundColor = 'gray';
-            alert('illuminance less than 10');
-        } */
     });
     sensorLight.start();
 } else {
-    console.log('light sensor not support');
+    document.getElementById('lightSensor').innerHTML = 'Light sensor not support';
 }
