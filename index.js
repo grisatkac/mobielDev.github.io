@@ -90,7 +90,6 @@ else statusGyro.innerHTML = 'Gyroscope not supported';
 
 let convertLux = (lux ,minLux, maxLux, minRGB, maxRGB) => {
     return (lux - minLux) * (maxRGB - minRGB) / (maxLux - minLux) + minRGB;
-    (this - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
 let statusLight = document.getElementById('lightSensor');
