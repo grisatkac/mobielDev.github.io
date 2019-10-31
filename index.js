@@ -107,3 +107,19 @@ if( 'AmbientLightSensor' in window ) {
 } else {
     document.getElementById('lightSensor').innerHTML = 'Light sensor not support';
 }
+
+let statusCompas = document.getElementById('statusCompas');
+if('AbsoluteOrientationSensor' in window) {
+    let sensorAbsoluteOrientation = new AbsoluteOrientationSensor();
+    sensorAbsoluteOrientation.addEventListener('reading', (e) => {
+        let q = e.target.quaternion,
+            degree =  Math.atan2(2*q[0]*q[1] + 2*q[2]*q[3], 1 - 2*q[1]*q[1] - 2*q[2]*q[2])*(180/Math.PI);
+        let statusText = `degrees: ${degree}`;
+        if( degree < 0) degree += 360;
+        statusText += `adjusted degrees: ${degree}`;
+        statusCompas.innerHTML= statusText;
+    });
+
+} else {
+    statusCompas.innerHTML = `absoluteOrientation sensor not support`;
+}
