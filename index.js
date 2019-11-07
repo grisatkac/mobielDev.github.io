@@ -342,7 +342,7 @@ scene.add(arrow);
 /* arrow.rotation.y = 270 * Math.PI / 180; */
 function render() {
     requestAnimationFrame(render);
-    arrow.rotation.y = degree * Math.PI / 180;
+    arrow.rotation.y = -degree * Math.PI / 180;
     /*arrow.rotation.y += 0.001;
     console.log(`rotate degree: ${arrow.rotation.y}`); */
     renderer.render(scene, camera);
