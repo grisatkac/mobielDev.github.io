@@ -1,5 +1,56 @@
 import * as THREE from './lib/three.module.js';
-let degree;
+/*let degree;*/
+
+function showCompass(degree) {
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 30, 75);
+    let renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    const color = 0xFFFFFF;
+    const intensity = 1;
+    const light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(-1, 2, 4);
+    scene.add(light);
+
+    const geometry = new THREE.Geometry();
+    geometry.vertices = [
+        new THREE.Vector3(0, 0, 20),
+        new THREE.Vector3(-5, 0, 0),
+        new THREE.Vector3(0, 0, -20),
+        new THREE.Vector3(5, 0, 0),
+        new THREE.Vector3(0, 0, 20),
+        new THREE.Vector3(0, 2 ,0),
+        new THREE.Vector3(-5, 0, 0),
+        new THREE.Vector3(0, 2 ,0),
+        new THREE.Vector3(5, 0, 0),
+        new THREE.Vector3(0, 2 ,0),
+        new THREE.Vector3(0, 0, -20),
+    ];
+
+    geometry.faces = [
+        new THREE.Face3(0, 5, 1), //0
+        new THREE.Face3(3, 5, 4), //3
+        new THREE.Face3(1, 9, 2), //1
+        new THREE.Face3(2, 7, 3), //2
+    ];
+
+    geometry.faces[0].color = geometry.faces[1].color = new THREE.Color('blue');
+    geometry.faces[2].color = geometry.faces[3].color = new THREE.Color('red');
+
+    const material = new THREE.MeshBasicMaterial({vertexColors: THREE.FaceColors});
+    const arrow = new THREE.Mesh(geometry, material);
+    scene.add(arrow);
+
+    function render() {
+        requestAnimationFrame(render);
+        arrow.rotation.y = -degree * Math.PI / 180;
+        renderer.render(scene, camera);
+    }
+    render();
+}
 
 let statusAcce = document.getElementById('accelerometr');
 if('Accelerometer' in window) {
@@ -11,17 +62,6 @@ if('Accelerometer' in window) {
 }else {
     console.log('dont have acceleration sensor');
 }
-
-let status = document.getElementById('status');
-if ( 'Accelerometer' in window ) {
-  let sensor = new Accelerometer();
-  sensor.addEventListener('reading', function(e) {
-    status.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
-  });
-  sensor.start();
-}
-else status.innerHTML = 'Accelerometer not supported';
-
 
 let statusGyro = document.getElementById('statusGyro');
 if ( 'Gyroscope' in window ) {
@@ -56,6 +96,7 @@ if( 'AmbientLightSensor' in window ) {
 let statusCompas = document.getElementById('statusCompas');
 if('AbsoluteOrientationSensor' in window) {
     let sensorAbsoluteOrientation = new AbsoluteOrientationSensor();
+    let degree;
     sensorAbsoluteOrientation.addEventListener('reading', (e) => {
         let q = e.target.quaternion;
         degree =  Math.atan2(2*q[0]*q[1] + 2*q[2]*q[3], 1 - 2*q[1]*q[1] - 2*q[2]*q[2])*(180/Math.PI);
@@ -65,6 +106,7 @@ if('AbsoluteOrientationSensor' in window) {
         statusCompas.innerHTML= statusText;
     });
     sensorAbsoluteOrientation.start();
+    showCompass(degree);
 } else {
     statusCompas.innerHTML = `absoluteOrientation sensor not support`;
 }
@@ -72,7 +114,7 @@ if('AbsoluteOrientationSensor' in window) {
 console.log(window.innerWidth, window.innerHeight);
 let div3D = document.querySelector('.container3d');
 
-
+/*
 let scene = new THREE.Scene();
 let camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(0, 30, 75);
@@ -120,4 +162,4 @@ function render() {
     arrow.rotation.y = -degree * Math.PI / 180;
     renderer.render(scene, camera);
 }
-render();
+render(); */
