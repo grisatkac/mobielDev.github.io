@@ -1,7 +1,7 @@
 import * as THREE from './lib/three.module.js';
-/*let degree;*/
+let degree;
 
-function showCompass(degree) {
+/*function showCompass(degree) {
     let scene = new THREE.Scene();
     let camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(0, 30, 75);
@@ -50,7 +50,7 @@ function showCompass(degree) {
         renderer.render(scene, camera);
     }
     render();
-}
+}*/
 
 let statusAcce = document.getElementById('accelerometr');
 if('Accelerometer' in window) {
@@ -106,7 +106,6 @@ if('AbsoluteOrientationSensor' in window) {
         statusCompas.innerHTML= statusText;
     });
     sensorAbsoluteOrientation.start();
-    showCompass(degree);
 } else {
     statusCompas.innerHTML = `absoluteOrientation sensor not support`;
 }
@@ -114,7 +113,7 @@ if('AbsoluteOrientationSensor' in window) {
 console.log(window.innerWidth, window.innerHeight);
 let div3D = document.querySelector('.container3d');
 
-/*
+
 let scene = new THREE.Scene();
 let camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(0, 30, 75);
@@ -162,4 +161,4 @@ function render() {
     arrow.rotation.y = -degree * Math.PI / 180;
     renderer.render(scene, camera);
 }
-render(); */
+render();
