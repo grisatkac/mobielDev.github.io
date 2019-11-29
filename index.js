@@ -1,64 +1,11 @@
 import * as THREE from './lib/three.module.js';
 let degree;
-/*
-window.addEventListener('deviceorientation', (event) => {
-    console.log(`absolute: ${event.absolute}`);
-    console.log(`apha: ${event.alpha}`)
-    document.querySelector('#absolute').innerHTML = `absolute: ${event.absolute} \n`;
-    document.querySelector('#alpha').innerHTML = `alpha: ${event.alpha} \n`;
-    document.querySelector('#beta').innerHTML = `beta: ${event.beta} \n`;
-    document.querySelector('#gamma').innerHTML = `gamma: ${event.gamma} \n`;
-});*/
-/*
-window.addEventListener('devicemotion', (event) => {
-    console.log(`ускорение: `);
-    console.log(event.acceleration);
-    console.log(`ускорение по осям: `);
-    console.log(event.accelerationIncludingGravity);
-    console.log(`скорость изменени по осям: `);
-    console.log(event.rotationRate);
-    console.log(`время получения с устройства: `);
-    console.log(event.interval);
-    document.querySelector('#motion1').innerHTML = `ускорение: ${event.acceleration.x.toFixed(3)}, 
-    ${event.acceleration.y.toFixed(3)}, ${event.acceleration.z.toFixed(3)} \n`;
-    document.querySelector('#motion2').innerHTML = `ускорение по осям: ${event.accelerationIncludingGravity.x},
-    ${event.acceleration.y}, ${event.acceleration.z} \n`;
-    document.querySelector('#motion3').innerHTML = `скорость изменени по осям: ${event.rotationRate.alpha},
-    ${event.rotationRate.beta}, ${event.rotationRate.gamma} \n`;
-    document.querySelector('#motion4').innerHTML = `время получения с устройства: ${event.interval} \n`;
-});
 
-geoBtn.addEventListener('click', () => {
-    if("geolocation" in navigator) {
-        function havePosition(pos) {
-            console.log(`x: ${pos.coords.latitude}`);
-            console.log(`y: ${pos.coords.longitude}`);
-            alert(`x: ${pos.coords.latitude}`);
-            alert(`y: ${pos.coords.longitude}`);
-        }
-
-        function noPosition(pos) {
-            console.log("device don't have geolocation sensor");
-        }
-
-        let options = {
-            enableHighAccuracy: true,
-            timeout: 5000,
-            maximumAge: 0,
-        };
-
-        navigator.geolocation.getCurrentPosition(havePosition, noPosition, options);
-    }else {
-        console.log('navigation in not avaible');
-    }
-});*/
-
-
-let AcceBtn = document.getElementById('accelerometr');
+let statusAcce = document.getElementById('accelerometr');
 if('Accelerometer' in window) {
     let AcceSensor = new Accelerometer();
     AcceSensor.addEventListener('reading', (e) => {
-        accelerometr.innerHTML =  'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
+        statusAcce.innerHTML =  'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
     });
     AcceSensor.start();
 }else {
@@ -124,59 +71,7 @@ if('AbsoluteOrientationSensor' in window) {
 
 console.log(window.innerWidth, window.innerHeight);
 let div3D = document.querySelector('.container3d');
-/*div3D.style.width = `${window.innerWidth}px`;
-div3D.style.height = `${window.innerHeight}px`;*/
-/* main code
-let scene = new THREE.Scene();
-let camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 30, 75);
-let renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
 
-let material = new THREE.LineBasicMaterial({ color: 0x0000ff });
-let geometry = new THREE.Geometry();
-
-geometry.vertices = [
-    new THREE.Vector3(0, 0, 20),
-    new THREE.Vector3(-5, 0, 0),
-    new THREE.Vector3(0, 0, -20),
-    new THREE.Vector3(5, 0, 0),
-    new THREE.Vector3(0, 0, 20),
-    new THREE.Vector3(0, 2 ,0),
-    new THREE.Vector3(-5, 0, 0),
-    new THREE.Vector3(0, 2 ,0),
-    new THREE.Vector3(5, 0, 0),
-    new THREE.Vector3(0, 2 ,0),
-    new THREE.Vector3(0, 0, -20),
-];
-geometry.faces = [
-    new THREE.Face3(0, 1, 5),
-    new THREE.Face3(3, 4, 5),
-    new THREE.Face3(1, 2, 9),
-    new THREE.Face3(2, 3, 7),
-];
-
-geometry.faces = [
-    new THREE.Face3(0, 5, 1),
-    new THREE.Face3(3, 5, 4),
-    new THREE.Face3(1, 9, 2),
-    new THREE.Face3(2, 7, 3),
-];
-
-let line = new THREE.Line( geometry, material);
-scene.add(line);
-
-function render() {
-    requestAnimationFrame(render);
-    
-    renderer.render(scene, camera);
-}
-render();
-
-console.log(THREE); */
-
-/* geometry.elementsNeedUpdate = true; */
 
 let scene = new THREE.Scene();
 let camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000);
