@@ -26,6 +26,32 @@ let convertLux = (lux ,minLux, maxLux, minRGB, maxRGB) => {
     return (lux - minLux) * (maxRGB - minRGB) / (maxLux - minLux) + minRGB;
 }
 
+if('Magnetometer' in window) {
+    let statusMagnetometer = document.getElementById('statusMagnetometer');
+    let sensorMagnet = new Magnetometer();
+    sensorMagnet.addEventListener('reading', (e) => {
+        let valueForCompass = Math.atan2(e.target.y, e.target.x) * (180 / Math.PI);
+        valueForCompass = valueForCompass - 180;
+        if (valueForCompass < 0) valueForCompass = 360 + valueForCompass;
+        statusMagnetometer.innerHTML = `Value for compass of magnetometer sensor: ${valueForCompass};`
+    });
+    sensorMagnet.start();
+} else {
+    statusMagnetometer.innerHTML = 'Magnetometr not supported';
+}
+
+/*let sensor = new AmbientLightSensor({frequency: 1});
+
+sensor.addEventListener('reading', getValueFromSensor);
+
+function getValueFromSensor() {
+    //Действия со значениям датчика
+}
+
+sensor.start();
+
+sensor.stop();*/
+
 let statusLight = document.getElementById('lightSensor');
 if( 'AmbientLightSensor' in window ) {
     let sensorLight = new AmbientLightSensor();
