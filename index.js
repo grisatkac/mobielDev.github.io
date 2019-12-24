@@ -52,6 +52,13 @@ sensor.start();
 
 sensor.stop();*/
 
+let sensor = new AbsoluteOrientationSensor();
+sensor.addEventListener('reading', (e) => {
+    let value = e.target.quaternion;
+});
+
+
+
 let statusLight = document.getElementById('lightSensor');
 if( 'AmbientLightSensor' in window ) {
     let sensorLight = new AmbientLightSensor();
@@ -73,19 +80,27 @@ if('AbsoluteOrientationSensor' in window) {
     let sensorAbsoluteOrientation = new AbsoluteOrientationSensor();
     sensorAbsoluteOrientation.addEventListener('reading', (e) => {
         let q = e.target.quaternion;
+        let absoluteDegree = 0;
         degree =  Math.atan2(2*q[0]*q[1] + 2*q[2]*q[3], 1 - 2*q[1]*q[1] - 2*q[2]*q[2])*(180/Math.PI);
-        let statusText = `degrees: ${degree}`;
-        if( degree < 0) degree += 360;
-        statusText += `adjusted degrees: ${degree}`;
-        statusCompas.innerHTML= statusText;
+        /*let statusText = `degrees: ${degree}`;*/
+        if( degree < 0) {
+            absoluteDegree = degree;
+            absoluteDegree *= -1;
+            degree += 360;
+            statusCompas.innerHTML= `degrees: ${absoluteDegree}`;
+        } else if( degree > 0) {
+            absoluteDegree -= 360;
+            statusCompas.innerHTML= `degrees: ${Math.abs(absoluteDegree)}`;
+        }
+        
+        /*statusText += `adjusted degrees: ${degree}`;*/
+        statusCompas.innerHTML= `degrees: ${Math.abs(absoluteDegree)}`;
     });
     sensorAbsoluteOrientation.start();
 } else {
     statusCompas.innerHTML = `absoluteOrientation sensor not support`;
 }
 
-console.log(window.innerWidth, window.innerHeight);
-let div3D = document.querySelector('.container3d');
 //создание 3D стрелки компаса
 
 let scene = new THREE.Scene();
