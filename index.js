@@ -85,10 +85,10 @@ if('AbsoluteOrientationSensor' in window) {
         /*let statusText = `degrees: ${degree}`;*/
         if( degree < 0) {
             absoluteDegree = degree;
-            absoluteDegree *= -1;
             degree += 360;
             statusCompas.innerHTML= `degrees: ${absoluteDegree}`;
         } else if( degree >= 0) {
+            absoluteDegree = degree;
             absoluteDegree -= 360;
             statusCompas.innerHTML= `degrees: ${Math.abs(absoluteDegree)}`;
         }
