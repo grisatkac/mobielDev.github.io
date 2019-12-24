@@ -31,7 +31,7 @@ if('Magnetometer' in window) {
     let sensorMagnet = new Magnetometer();
     sensorMagnet.addEventListener('reading', (e) => {
         let valueForCompass = Math.atan2(e.target.y, e.target.x) * (180 / Math.PI);
-        valueForCompass = valueForCompass - 180;
+        valueForCompass = valueForCompass - 90;
         if (valueForCompass < 0) valueForCompass = 360 + valueForCompass;
         statusMagnetometer.innerHTML = `Value for compass of magnetometer sensor: ${valueForCompass};`
     });
@@ -88,7 +88,7 @@ if('AbsoluteOrientationSensor' in window) {
             absoluteDegree *= -1;
             degree += 360;
             statusCompas.innerHTML= `degrees: ${absoluteDegree}`;
-        } else if( degree > 0) {
+        } else if( degree >= 0) {
             absoluteDegree -= 360;
             statusCompas.innerHTML= `degrees: ${Math.abs(absoluteDegree)}`;
         }
