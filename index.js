@@ -59,7 +59,7 @@ sensor.addEventListener('reading', (e) => {
 
 
 
-let statusLight = document.getElementById('lightSensor');
+/*let statusLight = document.getElementById('lightSensor');
 if( 'AmbientLightSensor' in window ) {
     let sensorLight = new AmbientLightSensor();
     sensorLight.addEventListener('reading', (e) => {
@@ -73,7 +73,7 @@ if( 'AmbientLightSensor' in window ) {
     sensorLight.start();
 } else {
     document.getElementById('lightSensor').innerHTML = 'Light sensor not support';
-}
+}*/
 //работа с датчиком для получения значения и использовании в компасе
 let statusCompas = document.getElementById('statusCompas');
 if('AbsoluteOrientationSensor' in window) {
@@ -149,3 +149,25 @@ function render() {
     renderer.render(scene, camera);
 }
 render();
+
+
+let inputField = document.getElementById('inputText');
+
+inputField.addEventListener('keyup', (e) => {
+    
+    if(e.keyCode == 78) {
+        e.target.selectionStart += 1;
+    }
+
+    if(e.keyCode == 80) {
+        console.log('previous');
+        e.target.selectionStart -= 1;
+        e.target.selectionEnd -= 1;
+    }
+    console.log(`pointer at: ${e.target.selectionStart}`);
+})
+
+inputField.addEventListener('click', (e) => {
+    
+    
+})
