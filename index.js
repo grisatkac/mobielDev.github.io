@@ -108,6 +108,7 @@ if('RelativeOrientationSensor' in window) {
         let q = e.target.quaternion;
         relativeDirections.innerHTML = `x: ${q[0]} <br/> y: ${q[1]} <br/> z: ${q[2]} <br/> w: ${q[3]}`;
     })
+    sensorRelativeOrientation.start();
 } else {
     relativeDirections.innerHTML = 'relaiveOrientation sensor not support';
 }
