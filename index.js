@@ -76,6 +76,7 @@ if( 'AmbientLightSensor' in window ) {
 }*/
 //работа с датчиком для получения значения и использовании в компасе
 let statusCompas = document.getElementById('statusCompas');
+let absoluteDirections = document.getElementById('absolute-direction');
 if('AbsoluteOrientationSensor' in window) {
     let sensorAbsoluteOrientation = new AbsoluteOrientationSensor();
     sensorAbsoluteOrientation.addEventListener('reading', (e) => {
@@ -83,6 +84,7 @@ if('AbsoluteOrientationSensor' in window) {
         let absoluteDegree = 0;
         degree =  Math.atan2(2*q[0]*q[1] + 2*q[2]*q[3], 1 - 2*q[1]*q[1] - 2*q[2]*q[2])*(180/Math.PI);
         /*let statusText = `degrees: ${degree}`;*/
+        absoluteDirections.innerHTML = `x: ${q[0]} <br/> y: ${q[1]} <br/> z: ${q[2]} <br/> w: ${q[3]}`;
         if( degree < 0) {
             absoluteDegree = degree;
             statusCompas.innerHTML= `degrees: ${Math.abs(absoluteDegree)}`;
