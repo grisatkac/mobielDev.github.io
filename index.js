@@ -101,6 +101,17 @@ if('AbsoluteOrientationSensor' in window) {
     statusCompas.innerHTML = `absoluteOrientation sensor not support`;
 }
 
+let relativeDirections = document.getElementById('relative-direction');
+if('RelativeOrientationSensor' in window) {
+    let sensorRelativeOrientation = new RelativeOrientationSensor();
+    sensorRelativeOrientation.addEventListener('reading', (e) => {
+        let q = e.target.quaternion;
+        relativeDirections.innerHTML = `x: ${q[0]} <br/> y: ${q[1]} <br/> z: ${q[2]} <br/> w: ${q[3]}`;
+    })
+} else {
+    relativeDirections.innerHTML = 'relaiveOrientation sensor not support';
+}
+
 //создание 3D стрелки компаса
 
 let scene = new THREE.Scene();
