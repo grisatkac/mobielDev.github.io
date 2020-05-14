@@ -12,6 +12,17 @@ if('Accelerometer' in window) {
     console.log('dont have acceleration sensor');
 }
 
+let acceleration = document.getElementById('linear-acceleration');
+if('LinearAccelerationSensor' in window) {
+    let linearAcceleration = new LinearAccelerationSensor();
+    linearAcceleration.addEventListener('reading', (e) => {
+        acceleration.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
+    });
+    linearAcceleration.start();
+} else {
+    console.log('LinearAccelerationSensor not supported');
+}
+
 let statusGyro = document.getElementById('statusGyro');
 if ( 'Gyroscope' in window ) {
   let sensorGyro = new Gyroscope();
