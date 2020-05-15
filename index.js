@@ -7,7 +7,7 @@ if('Accelerometer' in window) {
     let AcceSensor = new Accelerometer();
     AcceSensor.addEventListener('reading', (e) => {
         statusAcce.innerHTML =  'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
-        if(e.target.z >= 9.79 && e.target.z <= 9.91 && Math.abs(e.target.y) <= 0.2) {
+        if(e.target.z >= 9.79 && e.target.z <= 9.91 && Math.abs(e.target.y) <= 0.02) {
             statusSide.style.color = 'green';
             statusSide.innerHTML = 'Поверхность без наклонений';
         } else {
