@@ -2,10 +2,18 @@ import * as THREE from './lib/three.module.js';
 let degree;
 
 let statusAcce = document.getElementById('accelerometr');
+let statusSide = document.getElementById('statusSide');
 if('Accelerometer' in window) {
     let AcceSensor = new Accelerometer();
     AcceSensor.addEventListener('reading', (e) => {
         statusAcce.innerHTML =  'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
+        if(e.target.z >= 9.79 && e.target.z <= 9.91) {
+            statusSide.style.color = 'green';
+            statusSide.innerHTML = 'Поверхность без наклонений'
+        } else {
+            statusSide.style.color = 'red';
+            statusSide.innerHTML = 'Поверхность находится под наклоном';
+        }
     });
     AcceSensor.start();
 }else {
