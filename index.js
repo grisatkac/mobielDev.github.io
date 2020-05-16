@@ -29,7 +29,7 @@ if('LinearAccelerationSensor' in window) {
     let linearAcceleration = new LinearAccelerationSensor();
     linearAcceleration.addEventListener('reading', (e) => {
         acceleration.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
-        currentSpeed.innerHTML = `current speed: ${caclulateCurrentSpeed(e.target.x, e.target.y, e.target.z)}`;
+        /*currentSpeed.innerHTML = `current speed: ${caclulateCurrentSpeed(e.target.x, e.target.y, e.target.z)}`;*/
     });
     linearAcceleration.start();
 } else {
