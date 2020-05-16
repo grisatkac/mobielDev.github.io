@@ -4,7 +4,7 @@ let degree;
 let statusAcce = document.getElementById('accelerometr');
 let statusSide = document.getElementById('statusSide');
 if('Accelerometer' in window) {
-    let AcceSensor = new Accelerometer({frequency: 60});
+    let AcceSensor = new Accelerometer();
     AcceSensor.addEventListener('reading', (e) => {
         statusAcce.innerHTML =  'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
         if(e.target.z >= 9.76 && e.target.z <= 9.91 && Math.abs(e.target.y) <= 0.1) {
@@ -21,12 +21,15 @@ if('Accelerometer' in window) {
 }
 
 let acceleration = document.getElementById('linear-acceleration');
-let timestamp = document.getElementById('timestamp');
+let currentSpeed = document.getElementById('current-speed');
 if('LinearAccelerationSensor' in window) {
-    let linearAcceleration = new LinearAccelerationSensor({frequency: 60});
-    timestamp.innerHTML = linearAcceleration.timestamp;
+    function caclulateCurrentSpeed (x, y, z) {
+        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+    }
+    let linearAcceleration = new LinearAccelerationSensor();
     linearAcceleration.addEventListener('reading', (e) => {
         acceleration.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
+        currentSpeed.innerHTML = `current speed: ${caclulateCurrentSpeed(e.target.x, e.target.y, e.target.z)}`;
     });
     linearAcceleration.start();
 } else {
