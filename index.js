@@ -30,7 +30,7 @@ if('LinearAccelerationSensor' in window) {
     linearAcceleration.addEventListener('reading', (e) => {
         acceleration.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
         /*currentSpeed.innerHTML = `current speed: ${caclulateCurrentSpeed(e.target.x, e.target.y, e.target.z)}`;*/
-        currentSpeed.innerHTML = `${Math.sqrt(Math.pow(e.target.x, 2), Math.pow(e.target.y, 2), Math.pow(e.target.z, 2))}`
+        currentSpeed.innerHTML = `${Math.sqrt(Math.pow(e.target.x, 2)+ Math.pow(e.target.y, 2)+ Math.pow(e.target.z, 2))*1000/3600}км/ч`
     });
     linearAcceleration.start();
 } else {
