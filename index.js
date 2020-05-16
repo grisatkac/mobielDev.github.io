@@ -4,10 +4,10 @@ let degree;
 let statusAcce = document.getElementById('accelerometr');
 let statusSide = document.getElementById('statusSide');
 if('Accelerometer' in window) {
-    let AcceSensor = new Accelerometer();
+    let AcceSensor = new Accelerometer({frequency: 60});
     AcceSensor.addEventListener('reading', (e) => {
         statusAcce.innerHTML =  'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
-        if(e.target.z >= 9.79 && e.target.z <= 9.91 && Math.abs(e.target.y) <= 0.02) {
+        if(e.target.z >= 9.76 && e.target.z <= 9.91 && Math.abs(e.target.y) <= 0.1) {
             statusSide.style.color = 'green';
             statusSide.innerHTML = 'Поверхность без наклонений';
         } else {
@@ -21,8 +21,10 @@ if('Accelerometer' in window) {
 }
 
 let acceleration = document.getElementById('linear-acceleration');
+let timestamp = document.getElementById('timestamp');
 if('LinearAccelerationSensor' in window) {
-    let linearAcceleration = new LinearAccelerationSensor();
+    let linearAcceleration = new LinearAccelerationSensor({frequency: 60});
+    timestamp.innerHTML = linearAcceleration.timestamp;
     linearAcceleration.addEventListener('reading', (e) => {
         acceleration.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
     });
