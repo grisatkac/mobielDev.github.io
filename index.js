@@ -7,7 +7,7 @@ if('Accelerometer' in window) {
     let AcceSensor = new Accelerometer();
     AcceSensor.addEventListener('reading', (e) => {
         statusAcce.innerHTML =  'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
-        if(e.target.z >= 9.76 && e.target.z <= 9.91 && Math.abs(e.target.y) <= 0.2) {
+        if(e.target.z >= 9.76 && e.target.z <= 9.91 && Math.abs(e.target.y) <= 0.1) {
             statusSide.style.color = 'green';
             statusSide.innerHTML = 'Поверхность без наклонений';
         } else {
@@ -24,13 +24,13 @@ let acceleration = document.getElementById('linear-acceleration');
 let currentSpeed = document.getElementById('current-speed');
 if('LinearAccelerationSensor' in window) {
     function caclulateCurrentSpeed (x, y, z) {
-        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+        return (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2))*1000/3600).toFixed(5);
     }
     let linearAcceleration = new LinearAccelerationSensor();
     linearAcceleration.addEventListener('reading', (e) => {
         acceleration.innerHTML = 'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
-        /*currentSpeed.innerHTML = `current speed: ${caclulateCurrentSpeed(e.target.x, e.target.y, e.target.z)}`;*/
-        currentSpeed.innerHTML = `current speed: ${Math.sqrt((Math.pow(e.target.x, 2)+ Math.pow(e.target.y, 2)+ Math.pow(e.target.z, 2))*1000/3600).toFixed(5)}км/ч`;
+        currentSpeed.innerHTML = `current speed: ${caclulateCurrentSpeed(e.target.x, e.target.y, e.target.z)}км/ч`;
+        /*currentSpeed.innerHTML = `current speed: ${Math.sqrt((Math.pow(e.target.x, 2)+ Math.pow(e.target.y, 2)+ Math.pow(e.target.z, 2))*1000/3600).toFixed(5)}км/ч`;*/
         
     });
     linearAcceleration.start();
