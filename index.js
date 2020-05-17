@@ -6,7 +6,7 @@ let statusSide = document.getElementById('statusSide');
 if('Accelerometer' in window) {
     let AcceSensor = new Accelerometer();
     AcceSensor.addEventListener('reading', (e) => {
-        statusAcce.innerHTML =  'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
+        statusAcce.innerHTML =  'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
         if(e.target.z >= 9.76 && e.target.z <= 9.91 && Math.abs(e.target.y) <= 0.2) {
             statusSide.style.color = 'green';
             statusSide.innerHTML = 'Поверхность без наклонений';
@@ -28,9 +28,10 @@ if('LinearAccelerationSensor' in window) {
     }
     let linearAcceleration = new LinearAccelerationSensor();
     linearAcceleration.addEventListener('reading', (e) => {
-        acceleration.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
+        acceleration.innerHTML = 'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
         /*currentSpeed.innerHTML = `current speed: ${caclulateCurrentSpeed(e.target.x, e.target.y, e.target.z)}`;*/
-        currentSpeed.innerHTML = `${Math.sqrt(Math.pow(e.target.x, 2)+ Math.pow(e.target.y, 2)+ Math.pow(e.target.z, 2))*1000/3600}км/ч`
+        currentSpeed.innerHTML = `current speed: ${Math.sqrt((Math.pow(e.target.x, 2)+ Math.pow(e.target.y, 2)+ Math.pow(e.target.z, 2))*1000/3600).toFixed(5)}км/ч`;
+        
     });
     linearAcceleration.start();
 } else {
@@ -41,7 +42,7 @@ let statusGyro = document.getElementById('statusGyro');
 if ( 'Gyroscope' in window ) {
   let sensorGyro = new Gyroscope();
   sensorGyro.addEventListener('reading', function(e) {
-    statusGyro.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
+    statusGyro.innerHTML = 'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
   });
   sensorGyro.start();
 }
@@ -109,7 +110,7 @@ if('AbsoluteOrientationSensor' in window) {
         let absoluteDegree = 0;
         degree =  Math.atan2(2*q[0]*q[1] + 2*q[2]*q[3], 1 - 2*q[1]*q[1] - 2*q[2]*q[2])*(180/Math.PI);
         /*let statusText = `degrees: ${degree}`;*/
-        absoluteDirections.innerHTML = `x: ${q[0]} <br/> y: ${q[1]} <br/> z: ${q[2]} <br/> w: ${q[3]}`;
+        absoluteDirections.innerHTML = `x: ${q[0].toFixed(5)} <br/> y: ${q[1].toFixed(5)} <br/> z: ${q[2].toFixed(5)} <br/> w: ${q[3].toFixed(5)}`;
         if( degree < 0) {
             absoluteDegree = degree;
             statusCompas.innerHTML= `degrees: ${Math.abs(absoluteDegree)}`;
@@ -131,7 +132,7 @@ if('RelativeOrientationSensor' in window) {
     let sensorRelativeOrientation = new RelativeOrientationSensor();
     sensorRelativeOrientation.addEventListener('reading', (e) => {
         let q = e.target.quaternion;
-        relativeDirections.innerHTML = `x: ${q[0]} <br/> y: ${q[1]} <br/> z: ${q[2]} <br/> w: ${q[3]}`;
+        relativeDirections.innerHTML = `x: ${q[0].toFixed(5)} <br/> y: ${q[1].toFixed(5)} <br/> z: ${q[2].toFixed(5)} <br/> w: ${q[3].toFixed(5)}`;
     })
     sensorRelativeOrientation.start();
 } else {
