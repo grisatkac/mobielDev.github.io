@@ -21,17 +21,24 @@ if('Accelerometer' in window) {
 }
 
 let acceleration = document.getElementById('linear-acceleration');
-let currentSpeed = document.getElementById('current-speed');
+let currentSpeedField = document.getElementById('current-speed');
+let maxSpeedField = document.getElementById('max-speed');
 if('LinearAccelerationSensor' in window) {
     function caclulateCurrentSpeed (x, y, z) {
         return (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2))*1000/3600).toFixed(5);
     }
+    let maxSpeed = 0;
+    let currentSpeed = 0;
     let linearAcceleration = new LinearAccelerationSensor();
     linearAcceleration.addEventListener('reading', (e) => {
+        currentSpeed = caclulateCurrentSpeed(e.target.x, e.target.y, e.target.z);
+        if ( maxSpeed < currentSpeed ) {
+            maxSpeed = currentSpeed;
+        }
         acceleration.innerHTML = 'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
-        currentSpeed.innerHTML = `current speed: ${caclulateCurrentSpeed(e.target.x, e.target.y, e.target.z)}км/ч`;
+        currentSpeedField.innerHTML = `current speed: ${currentSpeed}км/ч`;
         /*currentSpeed.innerHTML = `current speed: ${Math.sqrt((Math.pow(e.target.x, 2)+ Math.pow(e.target.y, 2)+ Math.pow(e.target.z, 2))*1000/3600).toFixed(5)}км/ч`;*/
-        
+        maxSpeedField.innerHTML = `max speed: ${maxSpeed}км/ч`;
     });
     linearAcceleration.start();
 } else {
