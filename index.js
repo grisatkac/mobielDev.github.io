@@ -198,7 +198,7 @@ function render() {
 render();
 
 
-let inputField = document.getElementById('inputText');
+/*let inputField = document.getElementById('inputText');
 
 inputField.addEventListener('keyup', (e) => {
     
@@ -217,4 +217,4 @@ inputField.addEventListener('keyup', (e) => {
 inputField.addEventListener('click', (e) => {
     
     
-})
+})*/
