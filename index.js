@@ -3,10 +3,25 @@ let degree;
 
 let statusAcce = document.getElementById('accelerometr');
 let statusSide = document.getElementById('statusSide');
+let inputField = document.getElementById('inputField');
+let statusInput = document.getElementById('statusInput');
+let positionXAceelerometer = 0;
+let startPositionInFocus = 0;
+
+inputField.addEventListener('focus', (e) => {
+    startPositionInFocus = positionXAceelerometer;
+    statusInput.innerHTML = 'focus';
+});
+
+inputField.addEventListener('blur', (e) => {
+    statusInput.innerHTML = 'not focus';
+});
+
 if('Accelerometer' in window) {
     let AcceSensor = new Accelerometer();
     AcceSensor.addEventListener('reading', (e) => {
         statusAcce.innerHTML =  'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
+        /* ровность поверхности */
         if(e.target.z >= 9.76 && e.target.z <= 9.91 && Math.abs(e.target.y) <= 0.1) {
             statusSide.style.color = 'green';
             statusSide.innerHTML = 'Поверхность без наклонений';
@@ -14,6 +29,9 @@ if('Accelerometer' in window) {
             statusSide.style.color = 'red';
             statusSide.innerHTML = 'Поверхность находится под наклоном';
         }
+        /* наклон курсора */
+        positionXAceelerometer = e.target.x.toFixed(5);
+
     });
     AcceSensor.start();
 }else {
@@ -198,7 +216,7 @@ function render() {
 render();
 
 
-/*let inputField = document.getElementById('inputText');
+/*let inputField = document.getElementById('inputField');
 
 inputField.addEventListener('keyup', (e) => {
     
