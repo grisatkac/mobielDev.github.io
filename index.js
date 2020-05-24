@@ -11,10 +11,12 @@ let startPositionInFocus = 0;
 inputField.addEventListener('focus', (e) => {
     startPositionInFocus = positionXAceelerometer;
     statusInput.innerHTML = 'focus';
+    alert('focus');
 });
 
 inputField.addEventListener('blur', (e) => {
     statusInput.innerHTML = 'not focus';
+    alert('not focus');
 });
 
 if('Accelerometer' in window) {
