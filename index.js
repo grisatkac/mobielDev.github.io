@@ -49,17 +49,16 @@ if('Accelerometer' in window) {
         */
 
         currentPosition = e.target.x;
-        if( currentPosition < previousPosition ) {
+        if( Math.abs(Math.abs(currentPosition) - Math.abs(previousPosition)) < 0.10 ) {
+            direction.innerHTML = 'Просто погрешность ввиду колебаний системы';
+            previousPosition = currentPosition;
+        } else if( currentPosition > previousPosition ) {
             previousPosition = currentPosition;
             direction.innerHTML = 'Наклон влево';
-        } else if ( currentPosition > previousPosition ) {
+        } else if ( currentPosition < previousPosition ) {
             previousPosition = currentPosition;
             direction.innerHTML = 'Наклон вправо';
-        }
-
-        
-        
-
+        };
     });
     AcceSensor.start();
 }else {
