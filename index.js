@@ -5,8 +5,11 @@ let statusAcce = document.getElementById('accelerometr');
 let statusSide = document.getElementById('statusSide');
 let inputField = document.getElementById('inputField');
 let statusInput = document.getElementById('statusInput');
+
+/* lean
 let positionXAceelerometer = 0;
 let startPositionInFocus = 0;
+*/
 
 inputField.addEventListener('focus', (e) => {
     startPositionInFocus = positionXAceelerometer;
@@ -21,6 +24,9 @@ inputField.addEventListener('blur', (e) => {
 
 if('Accelerometer' in window) {
     let AcceSensor = new Accelerometer();
+    let currentPosition = 0;
+    let previousPosition = 0;
+    let direction = document.getElementById('direction');
     AcceSensor.addEventListener('reading', (e) => {
         statusAcce.innerHTML =  'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
         /* ровность поверхности */
@@ -32,7 +38,27 @@ if('Accelerometer' in window) {
             statusSide.innerHTML = 'Поверхность находится под наклоном';
         }
         /* наклон курсора */
+        /*lean
         positionXAceelerometer = e.target.x.toFixed(5);
+        if (startPositionInFocus !=0) {
+            if( positionXAceelerometer > startPositionInFocus + 0.5 || 
+                positionXAceelerometer < startPositionInFocus - 0.5 ) {
+                    startPositionInFocus = positionXAceelerometer;
+                }
+        }
+        */
+
+        currentPosition = e.target.x;
+        if( currentPosition < previousPosition ) {
+            previousPosition = currentPosition;
+            direction.innerHTML = 'Наклон влево';
+        } else if ( currentPosition > previousPosition ) {
+            previousPosition = currentPosition;
+            direction.innerHTML = 'Наклон вправо';
+        }
+
+        
+        
 
     });
     AcceSensor.start();
