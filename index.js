@@ -26,7 +26,13 @@ if('Accelerometer' in window) {
     let AcceSensor = new Accelerometer();
     let currentPosition = 0;
     let previousPosition = 0;
-    let direction = document.getElementById('direction');
+    direction = {
+        lean: '', //
+        rightDirection: false, // true/false
+        leftDirection: false, // true/false
+    }
+    
+    let directionStatus = document.getElementById('direction');
     AcceSensor.addEventListener('reading', (e) => {
         statusAcce.innerHTML =  'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
         /* ровность поверхности */
@@ -50,14 +56,21 @@ if('Accelerometer' in window) {
 
         currentPosition = e.target.x;
         if( Math.abs(Math.abs(currentPosition) - Math.abs(previousPosition)) < 0.10 ) {
-            direction.innerHTML = 'Просто погрешность ввиду колебаний системы';
+            directionStatus.innerHTML = 'Просто погрешность ввиду колебаний системы';
             previousPosition = currentPosition;
         } else if( currentPosition > previousPosition ) {
+            if( direction.rightDirection ) {
+                
+            }
             previousPosition = currentPosition;
-            direction.innerHTML = 'Наклон влево';
+            directionStatus.innerHTML = 'Наклон влево';
+            direction.leftDirection = true;
+            direction.rightDirection = false;
         } else if ( currentPosition < previousPosition ) {
             previousPosition = currentPosition;
-            direction.innerHTML = 'Наклон вправо';
+            directionStatus.innerHTML = 'Наклон вправо';
+            direction.rightDirection = true;
+            directio.leftDirection = false;
         };
     });
     AcceSensor.start();
