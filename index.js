@@ -333,7 +333,7 @@ inputField.addEventListener('click', (e) => {
     
     
 })*/
-let moveCursor = document.getElementById('moveCursor');
+/*let moveCursor = document.getElementById('moveCursor');
 let inputField = document.getElementById('inputField');
 
 
@@ -354,4 +354,4 @@ inputField.addEventListener('keyup', (e) => {
         e.target.selectionEnd -= 1;
     }
     console.log(`pointer at: ${e.target.selectionStart}`);
-})
+})*/
