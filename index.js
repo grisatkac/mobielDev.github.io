@@ -36,6 +36,11 @@ if('Accelerometer' in window) {
     let inputField = document.getElementById('inputField');
     let cursor = document.getElementById('cursor');
     let inputLength  = 0;
+
+    inputField.addEventListener('keyup', (e) => {
+        inputLength = inputField.value.length;
+
+    });
     
     let directionStatus = document.getElementById('direction');
     let lean = document.getElementById('lean');
@@ -70,7 +75,7 @@ if('Accelerometer' in window) {
         */
 
         currentPosition = e.target.x;
-        inputLength = inputField.value.length;
+        /*inputLength = inputField.value.length;*/
 
         if( Math.abs(currentPosition) < 1 && direction.movementReverse === 'reverse' ) {
             /*if( direction.leftDirection ) {*/
