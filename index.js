@@ -63,6 +63,7 @@ if('Accelerometer' in window) {
             if( direction.rightDirection ) {
                 direction.rightDirection = false;
                 direction.lean = 'reverse';
+                directionStatus.innerHTML = 'Поворот';
             }
             previousPosition = currentPosition;
             directionStatus.innerHTML = 'Наклон влево';
@@ -72,6 +73,8 @@ if('Accelerometer' in window) {
             if ( direction.leftDirection ) {
                 direction.leftDirection = false;
                 direction.lean = 'reverse';
+                directionStatus.innerHTML = 'Поворот';
+                
             }
             previousPosition = currentPosition;
             directionStatus.innerHTML = 'Наклон вправо';
