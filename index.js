@@ -26,7 +26,7 @@ if('Accelerometer' in window) {
     let AcceSensor = new Accelerometer();
     let currentPosition = 0;
     let previousPosition = 0;
-    direction = {
+    let direction = {
         lean: '', // straight/reverse/none
         rightDirection: false, // true/false
         leftDirection: false, // true/false
@@ -62,7 +62,7 @@ if('Accelerometer' in window) {
         } else if( currentPosition > previousPosition ) {
             if( direction.rightDirection ) {
                 direction.rightDirection = false;
-                /*direction.lean = 'reverse';*/
+                direction.lean = 'reverse';
             }
             previousPosition = currentPosition;
             directionStatus.innerHTML = 'Наклон влево';
@@ -71,7 +71,7 @@ if('Accelerometer' in window) {
         } else if ( currentPosition < previousPosition ) {
             if ( direction.leftDirection ) {
                 direction.leftDirection = false;
-                /*direction.lean = 'reverse';*/
+                direction.lean = 'reverse';
             }
             previousPosition = currentPosition;
             directionStatus.innerHTML = 'Наклон вправо';
