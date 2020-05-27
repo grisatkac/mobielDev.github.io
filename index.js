@@ -34,6 +34,7 @@ if('Accelerometer' in window) {
     }
 
     let inputField = document.getElementById('inputField');
+    let cursor = document.getElementById('cursor');
     
 
     let inputLength = inputField.value.length;
@@ -78,7 +79,6 @@ if('Accelerometer' in window) {
                 inputLength -= 1;
                 inputField.focus();
                 inputField.setSelectionRange(inputLength, inputLength);
-
             }
 
             if( direction.rightDirection ) {
@@ -122,6 +122,7 @@ if('Accelerometer' in window) {
             previousPosition = currentPosition;
             
         }
+        cursor.innerHTML = `input length: ${inputLength}`;
 
         lean.innerHTML = `left direction: ${direction.leftDirection} ,
                         right direction: ${direction.rightDirection} ,
