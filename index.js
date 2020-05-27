@@ -53,9 +53,24 @@ if('Accelerometer' in window) {
                     startPositionInFocus = positionXAceelerometer;
                 }
         }
+
+        if( Math.abs(currentPosition) < 1 && direction.movementReverse === 'reverse' ) {
+            if( direction.rightDirection ) {
+                ....
+                direction.movementReverse = false;
+            }
+
+        }
         */
 
         currentPosition = e.target.x;
+        if( Math.abs(currentPosition) < 1 && direction.movementReverse === 'reverse' ) {
+            if( direction.rightDirection ) {
+                alert('сдвиг курсора');
+                direction.movementReverse = false;
+            }
+        }
+        
         if( Math.abs(Math.abs(currentPosition) - Math.abs(previousPosition)) < 0.10 ||
             Math.abs(currentPosition) > 5.5) {
             directionStatus.innerHTML = 'Просто погрешность ввиду колебаний системы';
