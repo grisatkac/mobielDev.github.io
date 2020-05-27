@@ -103,7 +103,7 @@ if('Accelerometer' in window) {
                 directionStatus.innerHTML = 'Поворот';
             } else {
                 direction.leftDirection = true;
-                /*direction.rightDirection = false;*/
+                direction.rightDirection = false;
                 directionStatus.innerHTML = 'Наклон влево';
             }
             previousPosition = currentPosition;
@@ -117,7 +117,7 @@ if('Accelerometer' in window) {
                 directionStatus.innerHTML = 'Поворот';
             } else {
                 direction.rightDirection = true;
-                /*direction.leftDirection = false;*/
+                direction.leftDirection = false;
                 directionStatus.innerHTML = 'Наклон вправо';
             }
             previousPosition = currentPosition;
