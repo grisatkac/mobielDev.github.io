@@ -77,7 +77,8 @@ if('Accelerometer' in window) {
             if( direction.rightDirection ) {
                 /*alert('сдвиг курсора влево');*/
                 direction.movementReverse = false;
-                inputLength = 1;
+                /*inputLength = 1;*/
+                inputLength -= 1;
                 inputField.focus();
                 inputField.setSelectionRange(inputLength, inputLength);
             }
@@ -85,7 +86,8 @@ if('Accelerometer' in window) {
             if( direction.leftDirection ) {
                 /*alert('сдвиг курсора вправо');*/
                 direction.movementReverse = false;
-                inputLength = 3;
+                /*inputLength = 3;*/
+                inputLength += 1;
                 inputField.focus();
                 inputField.setSelectionRange(inputLength, inputLength);
             }
