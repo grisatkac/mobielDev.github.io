@@ -37,7 +37,7 @@ if('Accelerometer' in window) {
     let cursor = document.getElementById('cursor');
     
 
-    let inputLength = inputField.value.length;
+    let inputLength  = 0;
     
     let directionStatus = document.getElementById('direction');
     let lean = document.getElementById('lean');
@@ -71,6 +71,7 @@ if('Accelerometer' in window) {
         */
 
         currentPosition = e.target.x;
+        inputLength = inputField.value.length;
 
         if( Math.abs(currentPosition) < 1 && direction.movementReverse === 'reverse' ) {
             if( direction.rightDirection ) {
