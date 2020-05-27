@@ -66,7 +66,12 @@ if('Accelerometer' in window) {
         currentPosition = e.target.x;
         if( Math.abs(currentPosition) < 1 && direction.movementReverse === 'reverse' ) {
             if( direction.rightDirection ) {
-                alert('сдвиг курсора');
+                alert('сдвиг курсора влево');
+                direction.movementReverse = false;
+            }
+
+            if( direction.rightDirection ) {
+                alert('сдвиг курсора вправо');
                 direction.movementReverse = false;
             }
         }
