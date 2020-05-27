@@ -75,7 +75,7 @@ if('Accelerometer' in window) {
 
         if( Math.abs(currentPosition) < 1 && direction.movementReverse === 'reverse' ) {
             if( direction.rightDirection ) {
-                /*alert('сдвиг курсора влево');*/
+                alert('сдвиг курсора влево');
                 direction.movementReverse = false;
                 inputLength = 1;
                 inputField.focus();
@@ -83,7 +83,7 @@ if('Accelerometer' in window) {
             }
 
             if( direction.rightDirection ) {
-                /*alert('сдвиг курсора вправо');*/
+                alert('сдвиг курсора вправо');
                 direction.movementReverse = false;
                 inputLength = 3;
                 inputField.focus();
