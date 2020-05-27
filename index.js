@@ -147,11 +147,12 @@ function getValueFromSensor() {
 sensor.start();
 
 sensor.stop();*/
-
+/*
 let sensor = new AbsoluteOrientationSensor();
+
 sensor.addEventListener('reading', (e) => {
     let value = e.target.quaternion;
-});
+});*/
 
 
 
