@@ -56,7 +56,7 @@ if('Accelerometer' in window) {
 
         currentPosition = e.target.x;
         if( Math.abs(Math.abs(currentPosition) - Math.abs(previousPosition)) < 0.10 ||
-            Math.abs(currentPosition) > 3.5) {
+            Math.abs(currentPosition) > 5.5) {
             directionStatus.innerHTML = 'Просто погрешность ввиду колебаний системы';
             previousPosition = currentPosition;
         } else if( currentPosition > previousPosition ) {
