@@ -27,7 +27,7 @@ if('Accelerometer' in window) {
     let currentPosition = 0;
     let previousPosition = 0;
     let direction = {
-        lean: '', // straight/reverse/none
+        movementReverse: false, //reverse/false
         rightDirection: false, // true/false
         leftDirection: false, // true/false
     }
@@ -62,24 +62,31 @@ if('Accelerometer' in window) {
         } else if( currentPosition > previousPosition ) {
             if( direction.rightDirection ) {
                 direction.rightDirection = false;
-                direction.lean = 'reverse';
+                /*direction.lean = 'reverse';*/
+                direction.movementReverse = 'reverse';
                 directionStatus.innerHTML = 'Поворот';
+            } else {
+                direction.leftDirection = true;
+                direction.rightDirection = false;
+                directionStatus.innerHTML = 'Наклон влево';
             }
             previousPosition = currentPosition;
-            directionStatus.innerHTML = 'Наклон влево';
-            direction.leftDirection = true;
-            direction.rightDirection = false;
+            
+            
         } else if ( currentPosition < previousPosition ) {
             if ( direction.leftDirection ) {
                 direction.leftDirection = false;
-                direction.lean = 'reverse';
+                /*direction.lean = 'reverse';*/
+                direction.movementReverse = 'reverse';
                 directionStatus.innerHTML = 'Поворот';
                 
+            } else {
+                direction.rightDirection = true;
+                direction.leftDirection = false;
+                directionStatus.innerHTML = 'Наклон вправо';
             }
             previousPosition = currentPosition;
-            directionStatus.innerHTML = 'Наклон вправо';
-            direction.rightDirection = true;
-            direction.leftDirection = false;
+            
         };
     });
     AcceSensor.start();
