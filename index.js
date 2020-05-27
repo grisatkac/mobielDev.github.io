@@ -3,14 +3,15 @@ let degree;
 
 let statusAcce = document.getElementById('accelerometr');
 let statusSide = document.getElementById('statusSide');
-let inputField = document.getElementById('inputField');
+
 let statusInput = document.getElementById('statusInput');
 
 /* lean
 let positionXAceelerometer = 0;
 let startPositionInFocus = 0;
 */
-
+/*
+let inputField = document.getElementById('inputField');
 inputField.addEventListener('focus', (e) => {
     startPositionInFocus = positionXAceelerometer;
     statusInput.innerHTML = 'focus';
@@ -20,7 +21,7 @@ inputField.addEventListener('focus', (e) => {
 inputField.addEventListener('blur', (e) => {
     statusInput.innerHTML = 'not focus';
     
-});
+});*/
 
 if('Accelerometer' in window) {
     let AcceSensor = new Accelerometer();
@@ -31,6 +32,11 @@ if('Accelerometer' in window) {
         rightDirection: false, // true/false
         leftDirection: false, // true/false
     }
+
+    let inputField = document.getElementById('inputField');
+    
+
+    let inputLength = inputField.value.length;
     
     let directionStatus = document.getElementById('direction');
     let lean = document.getElementById('lean');
@@ -64,15 +70,23 @@ if('Accelerometer' in window) {
         */
 
         currentPosition = e.target.x;
+
         if( Math.abs(currentPosition) < 1 && direction.movementReverse === 'reverse' ) {
             if( direction.rightDirection ) {
-                alert('сдвиг курсора влево');
+                /*alert('сдвиг курсора влево');*/
                 direction.movementReverse = false;
+                inputLength -= 1;
+                inputField.focus();
+                inputField.setSelectionRange(inputLength, inputLength);
+
             }
 
             if( direction.rightDirection ) {
-                alert('сдвиг курсора вправо');
+                /*alert('сдвиг курсора вправо');*/
                 direction.movementReverse = false;
+                inputLength += 1;
+                inputField.focus();
+                inputField.setSelectionRange(inputLength, inputLength);
             }
         }
         
@@ -317,3 +331,25 @@ inputField.addEventListener('click', (e) => {
     
     
 })*/
+let moveCursor = document.getElementById('moveCursor');
+let inputField = document.getElementById('inputField');
+
+
+moveCursor.addEventListener('click', () => {
+    inputField.focus();
+    inputField.setSelectionRange(5, 5);
+});
+
+inputField.addEventListener('keyup', (e) => {
+    
+    if(e.keyCode == 78) {
+        e.target.selectionStart += 1;
+    }
+
+    if(e.keyCode == 80) {
+        console.log('previous');
+        e.target.selectionStart -= 1;
+        e.target.selectionEnd -= 1;
+    }
+    console.log(`pointer at: ${e.target.selectionStart}`);
+})
