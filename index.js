@@ -27,7 +27,7 @@ if('Accelerometer' in window) {
     let currentPosition = 0;
     let previousPosition = 0;
     direction = {
-        lean: '', //
+        lean: '', // straight/reverse/none
         rightDirection: false, // true/false
         leftDirection: false, // true/false
     }
@@ -55,18 +55,23 @@ if('Accelerometer' in window) {
         */
 
         currentPosition = e.target.x;
-        if( Math.abs(Math.abs(currentPosition) - Math.abs(previousPosition)) < 0.10 ) {
+        if( Math.abs(Math.abs(currentPosition) - Math.abs(previousPosition)) < 0.10 ||
+            Math.abs(currentPosition) > 3.5) {
             directionStatus.innerHTML = 'Просто погрешность ввиду колебаний системы';
             previousPosition = currentPosition;
         } else if( currentPosition > previousPosition ) {
             if( direction.rightDirection ) {
-                
+                direction.rightDirection = false;
+                direction.lean = reverse;
             }
             previousPosition = currentPosition;
             directionStatus.innerHTML = 'Наклон влево';
             direction.leftDirection = true;
             direction.rightDirection = false;
         } else if ( currentPosition < previousPosition ) {
+            if ( direction.leftDirection ) {
+                direction.leftDirection = false;
+            }
             previousPosition = currentPosition;
             directionStatus.innerHTML = 'Наклон вправо';
             direction.rightDirection = true;
