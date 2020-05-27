@@ -76,7 +76,7 @@ if('Accelerometer' in window) {
             previousPosition = currentPosition;
             directionStatus.innerHTML = 'Наклон вправо';
             direction.rightDirection = true;
-            directio.leftDirection = false;
+            direction.leftDirection = false;
         };
     });
     AcceSensor.start();
