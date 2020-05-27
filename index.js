@@ -74,7 +74,7 @@ if('Accelerometer' in window) {
         inputLength = inputField.value.length;
 
         if( Math.abs(currentPosition) < 1 && direction.movementReverse === 'reverse' ) {
-            if( direction.rightDirection ) {
+            if( direction.leftDirection ) {
                 alert('сдвиг курсора влево');
                 direction.movementReverse = false;
                 inputLength = 1;
