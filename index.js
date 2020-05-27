@@ -95,7 +95,7 @@ if('Accelerometer' in window) {
             Math.abs(currentPosition) > 5.5) {
             directionStatus.innerHTML = 'Просто погрешность ввиду колебаний системы';
             previousPosition = currentPosition;
-        } else if( Math.abs(currentPosition) > Math.abs(previousPosition) ) {
+        } else if( currentPosition > previousPosition ) {
             if( direction.rightDirection ) {
                 direction.rightDirection = false;
                 /*direction.lean = 'reverse';*/
@@ -103,13 +103,13 @@ if('Accelerometer' in window) {
                 directionStatus.innerHTML = 'Поворот';
             } else {
                 direction.leftDirection = true;
-                direction.rightDirection = false;
+                /*direction.rightDirection = false;*/
                 directionStatus.innerHTML = 'Наклон влево';
             }
-            previousPosition = Math.abs(currentPosition);
+            previousPosition = currentPosition;
             
             
-        } else if ( Math.abs(currentPosition) < Math.abs(previousPosition) ) {
+        } else if ( currentPosition < previousPosition ) {
             if ( direction.leftDirection ) {
                 direction.leftDirection = false;
                 /*direction.lean = 'reverse';*/
@@ -117,10 +117,10 @@ if('Accelerometer' in window) {
                 directionStatus.innerHTML = 'Поворот';
             } else {
                 direction.rightDirection = true;
-                direction.leftDirection = false;
+                /*direction.leftDirection = false;*/
                 directionStatus.innerHTML = 'Наклон вправо';
             }
-            previousPosition = Math.abs(currentPosition);
+            previousPosition = currentPosition;
             
         }
         cursor.innerHTML = `input length: ${inputLength}`;
