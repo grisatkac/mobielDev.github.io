@@ -35,12 +35,11 @@ if('Accelerometer' in window) {
 
     let inputField = document.getElementById('inputField');
     let cursor = document.getElementById('cursor');
-    
-
     let inputLength  = 0;
     
     let directionStatus = document.getElementById('direction');
     let lean = document.getElementById('lean');
+    
     AcceSensor.addEventListener('reading', (e) => {
         statusAcce.innerHTML =  'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
         /* ровность поверхности */
@@ -74,15 +73,16 @@ if('Accelerometer' in window) {
         inputLength = inputField.value.length;
 
         if( Math.abs(currentPosition) < 1 && direction.movementReverse === 'reverse' ) {
-            if( direction.leftDirection ) {
+            /*if( direction.leftDirection ) {*/
+            if( direction.rightDirection ) {
                 alert('сдвиг курсора влево');
                 direction.movementReverse = false;
                 inputLength = 1;
                 inputField.focus();
                 inputField.setSelectionRange(inputLength, inputLength);
             }
-
-            if( direction.rightDirection ) {
+            /*if( direction.rightDirection ) {*/
+            if( direction.leftDirection ) {
                 alert('сдвиг курсора вправо');
                 direction.movementReverse = false;
                 inputLength = 3;
