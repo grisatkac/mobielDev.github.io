@@ -36,12 +36,17 @@ if('Accelerometer' in window) {
     }
 
     let inputField = document.getElementById('inputField');
-    
+    let cursor = document.getElementById('cursor');
+    let inputLength  = 0;
 
-    let inputLength = inputField.value.length;
+    inputField.addEventListener('keyup', (e) => {
+        inputLength = inputField.value.length;
+
+    });
     
     let directionStatus = document.getElementById('direction');
     let lean = document.getElementById('lean');
+    
     AcceSensor.addEventListener('reading', (e) => {
         statusAcce.innerHTML =  'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
         /* ровность поверхности */
@@ -72,20 +77,23 @@ if('Accelerometer' in window) {
         */
 
         currentPosition = e.target.x;
+        /*inputLength = inputField.value.length;*/
 
         if( Math.abs(currentPosition) < 1 && direction.movementReverse === 'reverse' ) {
+            /*if( direction.leftDirection ) {*/
             if( direction.rightDirection ) {
                 /*alert('сдвиг курсора влево');*/
                 direction.movementReverse = false;
+                /*inputLength = 1;*/
                 inputLength -= 1;
                 inputField.focus();
                 inputField.setSelectionRange(inputLength, inputLength);
-
             }
-
-            if( direction.rightDirection ) {
+            /*if( direction.rightDirection ) {*/
+            if( direction.leftDirection ) {
                 /*alert('сдвиг курсора вправо');*/
                 direction.movementReverse = false;
+                /*inputLength = 3;*/
                 inputLength += 1;
                 inputField.focus();
                 inputField.setSelectionRange(inputLength, inputLength);
@@ -124,6 +132,7 @@ if('Accelerometer' in window) {
             previousPosition = currentPosition;
             
         }
+        cursor.innerHTML = `input length: ${inputLength}`;
 
         lean.innerHTML = `left direction: ${direction.leftDirection} ,
                         right direction: ${direction.rightDirection} ,
@@ -333,7 +342,7 @@ inputField.addEventListener('click', (e) => {
     
     
 })*/
-let moveCursor = document.getElementById('moveCursor');
+/*let moveCursor = document.getElementById('moveCursor');
 let inputField = document.getElementById('inputField');
 
 
@@ -354,4 +363,4 @@ inputField.addEventListener('keyup', (e) => {
         e.target.selectionEnd -= 1;
     }
     console.log(`pointer at: ${e.target.selectionStart}`);
-})
+})*/
