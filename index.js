@@ -1,7 +1,4 @@
-let sensor = new LinearAccelerationSensor();
-sensor.addEventListener('reading', (e) => {
-    let value = `x: ${e.target.x}, y: ${e.target.y}, z: ${e.target.z}`;
-});
+
 
 import * as THREE from './lib/three.module.js';
 let degree;
