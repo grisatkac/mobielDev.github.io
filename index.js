@@ -1,7 +1,7 @@
-let sensor = new LinearAccelerationSensor();
+/*let sensor = new LinearAccelerationSensor();
 sensor.addEventListener('reading', (e) => {
     let value = `x: ${e.target.x}, y: ${e.target.y}, z: ${e.target.z}`;
-});
+});*/
 
 import * as THREE from './lib/three.module.js';
 let degree;
@@ -10,23 +10,6 @@ let statusAcce = document.getElementById('accelerometr');
 let statusSide = document.getElementById('statusSide');
 
 let statusInput = document.getElementById('statusInput');
-
-/* lean
-let positionXAceelerometer = 0;
-let startPositionInFocus = 0;
-*/
-/*
-let inputField = document.getElementById('inputField');
-inputField.addEventListener('focus', (e) => {
-    startPositionInFocus = positionXAceelerometer;
-    statusInput.innerHTML = 'focus';
-    
-});
-
-inputField.addEventListener('blur', (e) => {
-    statusInput.innerHTML = 'not focus';
-    
-});*/
 
 if('Accelerometer' in window) {
     let AcceSensor = new Accelerometer();
@@ -52,7 +35,7 @@ if('Accelerometer' in window) {
     
     AcceSensor.addEventListener('reading', (e) => {
         statusAcce.innerHTML =  'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
-        /* ровность поверхности */
+
         if(e.target.z >= 9.76 && e.target.z <= 9.91 && Math.abs(e.target.y) <= 0.1) {
             statusSide.style.color = 'green';
             statusSide.innerHTML = 'Поверхность без наклонений';
@@ -60,43 +43,20 @@ if('Accelerometer' in window) {
             statusSide.style.color = 'red';
             statusSide.innerHTML = 'Поверхность находится под наклоном';
         }
-        /* наклон курсора */
-        /*lean
-        positionXAceelerometer = e.target.x.toFixed(5);
-        if (startPositionInFocus !=0) {
-            if( positionXAceelerometer > startPositionInFocus + 0.5 || 
-                positionXAceelerometer < startPositionInFocus - 0.5 ) {
-                    startPositionInFocus = positionXAceelerometer;
-                }
-        }
-
-        if( Math.abs(currentPosition) < 1 && direction.movementReverse === 'reverse' ) {
-            if( direction.rightDirection ) {
-                ....
-                direction.movementReverse = false;
-            }
-
-        }
-        */
 
         currentPosition = e.target.x;
-        /*inputLength = inputField.value.length;*/
 
         if( Math.abs(currentPosition) < 1 && direction.movementReverse === 'reverse' ) {
-            /*if( direction.leftDirection ) {*/
+            
             if( direction.rightDirection ) {
-                /*alert('сдвиг курсора влево');*/
                 direction.movementReverse = false;
-                /*inputLength = 1;*/
                 inputLength -= 1;
                 inputField.focus();
                 inputField.setSelectionRange(inputLength, inputLength);
             }
-            /*if( direction.rightDirection ) {*/
+            
             if( direction.leftDirection ) {
-                /*alert('сдвиг курсора вправо');*/
                 direction.movementReverse = false;
-                /*inputLength = 3;*/
                 inputLength += 1;
                 inputField.focus();
                 inputField.setSelectionRange(inputLength, inputLength);
@@ -105,18 +65,13 @@ if('Accelerometer' in window) {
         
         if( Math.abs(Math.abs(currentPosition) - Math.abs(previousPosition)) < 0.10 ||
             Math.abs(currentPosition) > 5.5) {
-            directionStatus.innerHTML = 'Просто погрешность ввиду колебаний системы';
             previousPosition = currentPosition;
         } else if( currentPosition > previousPosition ) {
             if( direction.rightDirection ) {
                 direction.rightDirection = false;
-                /*direction.lean = 'reverse';*/
                 direction.movementReverse = 'reverse';
-                directionStatus.innerHTML = 'Поворот';
             } else {
                 direction.leftDirection = true;
-                /*direction.rightDirection = false;*/
-                directionStatus.innerHTML = 'Наклон влево';
             }
             previousPosition = currentPosition;
             
@@ -124,22 +79,13 @@ if('Accelerometer' in window) {
         } else if ( currentPosition < previousPosition ) {
             if ( direction.leftDirection ) {
                 direction.leftDirection = false;
-                /*direction.lean = 'reverse';*/
                 direction.movementReverse = 'reverse';
-                directionStatus.innerHTML = 'Поворот';
             } else {
                 direction.rightDirection = true;
-                /*direction.leftDirection = false;*/
-                directionStatus.innerHTML = 'Наклон вправо';
             }
             previousPosition = currentPosition;
             
         }
-        cursor.innerHTML = `input length: ${inputLength}`;
-
-        lean.innerHTML = `left direction: ${direction.leftDirection} ,
-                        right direction: ${direction.rightDirection} ,
-                        move: ${direction.movementReverse}`;
     });
     AcceSensor.start();
 }else {
