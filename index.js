@@ -109,7 +109,6 @@ if('LinearAccelerationSensor' in window) {
         }
         acceleration.innerHTML = 'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
         currentSpeedField.innerHTML = `current speed: ${currentSpeed}км/ч`;
-        /*currentSpeed.innerHTML = `current speed: ${Math.sqrt((Math.pow(e.target.x, 2)+ Math.pow(e.target.y, 2)+ Math.pow(e.target.z, 2))*1000/3600).toFixed(5)}км/ч`;*/
         maxSpeedField.innerHTML = `max speed: ${maxSpeed}км/ч`;
     });
     linearAcceleration.start();
