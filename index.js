@@ -9,7 +9,7 @@ let degree;
 let statusAcce = document.getElementById('accelerometr');
 let statusSide = document.getElementById('statusSide');
 
-let statusInput = document.getElementById('statusInput');
+/*let statusInput = document.getElementById('statusInput');*/
 
 if('Accelerometer' in window) {
     let AcceSensor = new Accelerometer();
@@ -21,8 +21,8 @@ if('Accelerometer' in window) {
         leftDirection: false, // true/false
     }
 
-    let inputField = document.getElementById('inputField');
-    let cursor = document.getElementById('cursor');
+    let inputField = document.getElementById('inputField1');
+    /*let cursor = document.getElementById('cursor');*/
     let inputLength  = 0;
 
     inputField.addEventListener('keyup', (e) => {
@@ -30,8 +30,8 @@ if('Accelerometer' in window) {
 
     });
     
-    let directionStatus = document.getElementById('direction');
-    let lean = document.getElementById('lean');
+    /*let directionStatus = document.getElementById('direction');*/
+    /*let lean = document.getElementById('lean');*/
     
     AcceSensor.addEventListener('reading', (e) => {
         statusAcce.innerHTML =  'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
@@ -116,13 +116,114 @@ if('LinearAccelerationSensor' in window) {
     console.log('LinearAccelerationSensor not supported');
 }
 
+
+let activeField = false,
+    allFiedls = Object.values(document.querySelectorAll('input')),
+    firstField = document.getElementById('inputField1'),
+    nextFocus = document.getElementById('nextFocus'),
+    prevFocus = document.getElementById('prevFocus');
+
+const changeFocusField = (el, event) => {
+    if( event == 'change' ) {
+        el.focus();
+    }
+    activeField = el;
+};
+
+nextFocus.addEventListener('click', (e) => {
+    e.preventDefault();
+    allFiedls[index+1].focus();
+});
+
+document.body.addEventListener('keyup', (e) => {
+    if(e.keyCode == 78) {
+        allFiedls.every((elem, index) => {
+            if(elem == activeField) {
+                changeFocusField(allFiedls[index+1], 'change');
+                return false;
+            } else {
+                return true;
+            }
+            
+        });
+    }
+
+    if(e.keyCode == 80) {
+        console.log('click p');
+        allFiedls.every((elem, index) => {
+            if(elem == activeField) {
+                console.log('change!');
+                console.log('index: ', index);
+                changeFocusField(allFiedls[index-1], 'change');
+                return false;
+            } else {
+                return true;
+            }
+            
+        });
+        
+
+    }
+})
+
+document.body.addEventListener('focusin', (e) => {
+    changeFocusField(e.target, 'focus');
+});
+
+document.body.addEventListener('focusout', (e) => {
+    activeField = false;
+});
+
+
+
 let statusGyro = document.getElementById('statusGyro');
 if ( 'Gyroscope' in window ) {
-  let sensorGyro = new Gyroscope();
-  sensorGyro.addEventListener('reading', function(e) {
-    statusGyro.innerHTML = 'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
-  });
-  sensorGyro.start();
+    /*test variables*/
+
+    let directionGyro = document.getElementById('directionGyro');
+    
+
+    /*test variables */
+    let currentPosition = 0,
+        previousPosition = 0;
+
+    let direction = {
+        movementReverse: false, //reverse/false
+        topDirection: false, // true/false
+        bottomDirection: false, // true/false
+    }
+
+    let sensorGyro = new Gyroscope();
+    sensorGyro.addEventListener('reading', function(e) {
+        statusGyro.innerHTML = 'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
+        currentPosition = e.target.x;
+        if (Math.abs(Math.abs(currentPosition) - Math.abs(previousPosition)) < 0.10 || 
+        Math.abs(currentPosition < 1)) {
+
+        } else if( currentPosition > previousPosition ) {
+            if( direction.bottomDirection ) {
+                direction.bottomDirection = false;
+                direction.movementReverse = 'reverse';
+            } else {
+                direction.topDirection = true;
+                directionGyro.innerHTML = 'движение к себе';
+            }
+            previousPosition = currentPosition;
+            
+            
+        } else if ( currentPosition < previousPosition ) {
+            if ( direction.topDirection ) {
+                direction.topDirection = false;
+                direction.movementReverse = 'reverse';
+            } else {
+                direction.bottomDirection = true;
+                directionGyro.innerHTML = 'движение от себя';
+            }
+            previousPosition = currentPosition;
+            
+        }
+    });
+    sensorGyro.start();
 }
 else statusGyro.innerHTML = 'Gyroscope not supported';
 //работа с освещенностью экрана
