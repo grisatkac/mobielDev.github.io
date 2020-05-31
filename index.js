@@ -50,14 +50,14 @@ if('Accelerometer' in window) {
             if( direction.rightDirection ) {
                 direction.movementReverse = false;
                 inputLength -= 1;
-                inputField.focus();
+                /*inputField.focus();*/
                 inputField.setSelectionRange(inputLength, inputLength);
             }
             
             if( direction.leftDirection ) {
                 direction.movementReverse = false;
                 inputLength += 1;
-                inputField.focus();
+                /*inputField.focus();*/
                 inputField.setSelectionRange(inputLength, inputLength);
             }
         }
