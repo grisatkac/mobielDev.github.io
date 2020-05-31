@@ -27,7 +27,6 @@ if('Accelerometer' in window) {
 
     inputField.addEventListener('keyup', (e) => {
         inputLength = inputField.value.length;
-
     });
     
     /*let directionStatus = document.getElementById('direction');*/
@@ -196,11 +195,14 @@ if ( 'Gyroscope' in window ) {
     let sensorGyro = new Gyroscope();
     sensorGyro.addEventListener('reading', function(e) {
         statusGyro.innerHTML = 'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
+
         currentPosition = e.target.x;
+
         if (Math.abs(Math.abs(currentPosition) - Math.abs(previousPosition)) < 0.10 || 
         Math.abs(currentPosition < 1)) {
+            previousPosition = currentPosition;
 
-        } else if( currentPosition > previousPosition ) {
+        } else if( currentPosition > 0 && currentPosition > 1 ) {
             if( direction.bottomDirection ) {
                 direction.bottomDirection = false;
                 direction.movementReverse = 'reverse';
@@ -211,7 +213,7 @@ if ( 'Gyroscope' in window ) {
             previousPosition = currentPosition;
             
             
-        } else if ( currentPosition < previousPosition ) {
+        } else if ( currentPosition < 0 && currentPosition < -1 ) {
             if ( direction.topDirection ) {
                 direction.topDirection = false;
                 direction.movementReverse = 'reverse';
