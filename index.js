@@ -215,6 +215,7 @@ if ( 'Gyroscope' in window ) {
             
             
         } else if ( currentPosition < 0 && currentPosition < -1 ) {
+            /* проблемы с этим условием,, не орабоатет*/
             if ( direction.topDirection ) {
                 direction.topDirection = false;
                 direction.movementReverse = 'reverse';
