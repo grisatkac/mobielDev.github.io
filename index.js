@@ -199,11 +199,11 @@ if ( 'Gyroscope' in window ) {
 
         currentPosition = e.target.x;
 
-        if (Math.abs(Math.abs(currentPosition) - Math.abs(previousPosition)) < 0.10 || 
+        /*if (Math.abs(Math.abs(currentPosition) - Math.abs(previousPosition)) < 0.10 || 
         Math.abs(currentPosition < 1)) {
             previousPosition = currentPosition;
 
-        } else if( currentPosition > 0 && currentPosition > 1 ) {
+        } else*/ if( currentPosition > 0 && currentPosition > 1 ) {
             if( direction.bottomDirection ) {
                 direction.bottomDirection = false;
                 direction.movementReverse = 'reverse';
@@ -215,6 +215,7 @@ if ( 'Gyroscope' in window ) {
             
             
         } else if ( currentPosition < 0 && currentPosition < -1 ) {
+            alert('ok');
             /* проблемы с этим условием,, не орабоатет*/
             if ( direction.topDirection ) {
                 direction.topDirection = false;
