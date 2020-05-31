@@ -204,26 +204,28 @@ if ( 'Gyroscope' in window ) {
             previousPosition = currentPosition;
 
         } else*/ if( currentPosition > 0 && currentPosition > 1 ) {
-            if( direction.bottomDirection ) {
+            /*if( direction.bottomDirection ) {
                 direction.bottomDirection = false;
                 direction.movementReverse = 'reverse';
             } else {
                 direction.topDirection = true;
                 directionGyro.innerHTML = 'движение к себе';
-            }
+            }*/
+            directionGyro.innerHTML = 'движение к себе';
             previousPosition = currentPosition;
             
             
         } else if ( currentPosition < 0 && currentPosition < -1 ) {
             alert('ok');
             /* проблемы с этим условием,, не орабоатет*/
-            if ( direction.topDirection ) {
+            /*if ( direction.topDirection ) {
                 direction.topDirection = false;
                 direction.movementReverse = 'reverse';
             } else {
                 direction.bottomDirection = true;
                 directionGyro.innerHTML = 'движение от себя';
-            }
+            }*/
+            directionGyro.innerHTML = 'движение от себя';
             previousPosition = currentPosition;
             
         }
