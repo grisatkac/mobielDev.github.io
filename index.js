@@ -184,7 +184,8 @@ if ( 'Gyroscope' in window ) {
 
     /*test variables */
     let currentPosition = 0,
-        previousPosition = 0;
+        previousPosition = 0,
+        statusDirection = document.getElementById('statusDirection');
 
     let direction = {
         movementReverse: false, //reverse/false
@@ -224,6 +225,11 @@ if ( 'Gyroscope' in window ) {
             previousPosition = currentPosition;
             
         }
+
+        statusDirection.innerHTML = `top direction: ${direction.topDirection},
+                                    bottom direction: ${direction.bottomDirection},
+                                    direction: ${direction.movementReverse}`;
+        
     });
     sensorGyro.start();
 }
