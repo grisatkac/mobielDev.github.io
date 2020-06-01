@@ -129,6 +129,8 @@ const changeFocusField = (el, event) => {
     activeField = el;
 };
 
+
+
 nextFocus.addEventListener('click', (e) => {
     e.preventDefault();
     allFiedls[index+1].focus();
@@ -212,7 +214,7 @@ if ( 'Gyroscope' in window ) {
 
                         switch (index) {
                             case 0:
-                                changeFocusField(allFiedls[allFiedls.length], 'change');
+                                changeFocusField(allFiedls[0], 'change');
                                 break;
                             
                             default:
@@ -235,7 +237,7 @@ if ( 'Gyroscope' in window ) {
 
                         switch (index) {
                             case allFiedls.length:
-                                changeFocusField(allFiedls[0], 'change');
+                                changeFocusField(allFiedls[allFiedls.length-1], 'change');
                                 break;
                         
                             default:
