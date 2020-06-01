@@ -211,6 +211,11 @@ if ( 'Gyroscope' in window ) {
                 direction.topDirection = true;
                 directionGyro.innerHTML = 'движение к себе';
             }*/
+            if(direction.bottomDirection) {
+                direction.bottomDirection = false;
+                direction.movementReverse = 'reverse';
+            }
+            direction.topDirection = true;
             directionGyro.innerHTML = 'движение к себе';
             previousPosition = currentPosition;
             
@@ -224,6 +229,11 @@ if ( 'Gyroscope' in window ) {
                 direction.bottomDirection = true;
                 directionGyro.innerHTML = 'движение от себя';
             }*/
+            if( direction.topDirection ) {
+                direction.topDirection = false;
+                direction.movementReverse = 'reverse';
+            }
+            direction.bottomDirection = true;
             directionGyro.innerHTML = 'движение от себя';
             previousPosition = currentPosition;
             
