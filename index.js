@@ -121,7 +121,7 @@ let activeField = false,
     firstField = document.getElementById('inputField1'),
     nextFocus = document.getElementById('nextFocus'),
     prevFocus = document.getElementById('prevFocus');
-
+let index = 0;
 const changeFocusField = (el, event) => {
     if( event == 'change' ) {
         el.focus();
@@ -204,13 +204,33 @@ if ( 'Gyroscope' in window ) {
         if( Math.abs(currentPosition) < 1 && direction.movementReverse == 'reverse') {
             if( direction.topDirection ) {
                 moveField.innerHTML = 'переместить фокус на предыдущее поле';
+                allFiedls.every((elem, index) => {
+                    if(elem == activeField) {
+                        changeFocusField(allFiedls[index-1], 'change');
+                        return false;
+                    } else {
+                        return true;
+                    }
+                    
+                });
                 direction.movementReverse = '';
             } else {
                 moveField.innerHTML = 'переместить фокус на следующее поле';
+                allFiedls.every((elem, index) => {
+                    if(elem == activeField) {
+                        changeFocusField(allFiedls[index+1], 'change');
+                        return false;
+                    } else {
+                        return true;
+                    }
+                    
+                });
                 direction.movementReverse = '';
             }
 
         }
+
+        
 
         /*if (Math.abs(Math.abs(currentPosition) - Math.abs(previousPosition)) < 0.10 || 
         Math.abs(currentPosition < 1)) {
