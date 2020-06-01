@@ -193,11 +193,24 @@ if ( 'Gyroscope' in window ) {
         bottomDirection: false, // true/false
     }
 
+    let moveField = document.getElementById('moveField');
+
     let sensorGyro = new Gyroscope();
     sensorGyro.addEventListener('reading', function(e) {
         statusGyro.innerHTML = 'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
 
         currentPosition = e.target.x;
+
+        if( Math.abs(currentPosition) < 1 && direction.movementReverse == 'reverse') {
+            if( direction.topDirection ) {
+                moveField.innerHTML = 'переместить фокус на предыдущее поле';
+                direction.movementReverse = '';
+            } else {
+                moveField.innerHTML = 'переместить фокус на следующее поле';
+                direction.movementReverse = '';
+            }
+
+        }
 
         /*if (Math.abs(Math.abs(currentPosition) - Math.abs(previousPosition)) < 0.10 || 
         Math.abs(currentPosition < 1)) {
