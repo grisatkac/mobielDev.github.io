@@ -8,6 +8,12 @@ let degree;
 
 let statusAcce = document.getElementById('accelerometr');
 let statusSide = document.getElementById('statusSide');
+const history = window.history;
+let goBack = document.getElementById('goBack');
+
+goBack.addEventListener('click', (e) => {
+    history.go(-1);
+});
 
 /*let statusInput = document.getElementById('statusInput');*/
 
@@ -102,10 +108,14 @@ if('LinearAccelerationSensor' in window) {
     let currentSpeed = 0;
     let linearAcceleration = new LinearAccelerationSensor();
     linearAcceleration.addEventListener('reading', (e) => {
+        /* calculate speed */
         currentSpeed = caclulateCurrentSpeed(e.target.x, e.target.y, e.target.z);
         if ( maxSpeed < currentSpeed ) {
             maxSpeed = currentSpeed;
         }
+        /* calculate speed */
+
+        
         acceleration.innerHTML = 'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
         currentSpeedField.innerHTML = `current speed: ${currentSpeed}км/ч`;
         maxSpeedField.innerHTML = `max speed: ${maxSpeed}км/ч`;
@@ -128,8 +138,6 @@ const changeFocusField = (el, event) => {
     }
     activeField = el;
 };
-
-
 
 nextFocus.addEventListener('click', (e) => {
     e.preventDefault();
