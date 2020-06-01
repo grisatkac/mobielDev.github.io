@@ -206,7 +206,21 @@ if ( 'Gyroscope' in window ) {
                 moveField.innerHTML = 'переместить фокус на предыдущее поле';
                 allFiedls.every((elem, index) => {
                     if(elem == activeField) {
-                        changeFocusField(allFiedls[index-1], 'change');
+                        /*if(index == 0) {
+                            changeFocusField(allFiedls[allFiedls.length], 'change');
+                        }*/
+
+                        switch (index) {
+                            case 0:
+                                changeFocusField(allFiedls[allFiedls.length], 'change');
+                                break;
+                            
+                            default:
+                                changeFocusField(allFiedls[index-1], 'change');
+                                break;
+                        }
+
+                        /*changeFocusField(allFiedls[index-1], 'change');*/
                         return false;
                     } else {
                         return true;
@@ -218,7 +232,17 @@ if ( 'Gyroscope' in window ) {
                 moveField.innerHTML = 'переместить фокус на следующее поле';
                 allFiedls.every((elem, index) => {
                     if(elem == activeField) {
-                        changeFocusField(allFiedls[index+1], 'change');
+
+                        switch (index) {
+                            case allFiedls.length:
+                                changeFocusField(allFiedls[0], 'change');
+                                break;
+                        
+                            default:
+                                changeFocusField(allFiedls[index+1], 'change');
+                                break;
+                        }
+                        /*changeFocusField(allFiedls[index+1], 'change');*/
                         return false;
                     } else {
                         return true;
