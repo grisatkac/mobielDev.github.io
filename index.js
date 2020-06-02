@@ -104,8 +104,19 @@ if('LinearAccelerationSensor' in window) {
     function caclulateCurrentSpeed (x, y, z) {
         return (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2))*1000/3600).toFixed(5);
     }
+
     let maxSpeed = 0;
     let currentSpeed = 0;
+
+    let direction = {
+        movementReverse: false, //reverse/false
+        rightDirection: false, // true/false
+        falseDirection: false, // true/false
+    }
+
+    let history = window.history;
+
+
     let linearAcceleration = new LinearAccelerationSensor();
     linearAcceleration.addEventListener('reading', (e) => {
         /* calculate speed */
@@ -114,8 +125,45 @@ if('LinearAccelerationSensor' in window) {
             maxSpeed = currentSpeed;
         }
         /* calculate speed */
+        currentPosition = e.target.x;
+        if( Math.abs(currentPosition) < 1 && direction.movementReverse == 'reverse') {
+            if( direction.rightDirection ) {
+                /*moveField.innerHTML = 'переместить фокус на предыдущее поле';*/
+                history.go(1);
+                direction.movementReverse = '';
+            } else {
+                /*moveField.innerHTML = 'переместить фокус на следующее поле';*/
+                history.back();
+                direction.movementReverse = '';
+            }
 
-        
+        }
+
+
+        if ( !activeField ) {
+            if ( currentPosition > 0 && currentPosition > 1 ) {
+            
+                if(direction.bottomDirection) {
+                    direction.bottomDirection = false;
+                    direction.movementReverse = 'reverse';
+                }
+                direction.topDirection = true;
+                directionGyro.innerHTML = 'движение к себе';
+                previousPosition = currentPosition;
+                
+                
+            } else if ( currentPosition < 0 && currentPosition < -1 ) {
+                
+                if( direction.topDirection ) {
+                    direction.topDirection = false;
+                    direction.movementReverse = 'reverse';
+                }
+                direction.bottomDirection = true;
+                directionGyro.innerHTML = 'движение от себя';
+                previousPosition = currentPosition;
+            }
+        }
+
         acceleration.innerHTML = 'x: ' + e.target.x.toFixed(5) + '<br> y: ' + e.target.y.toFixed(5) + '<br> z: ' + e.target.z.toFixed(5);
         currentSpeedField.innerHTML = `current speed: ${currentSpeed}км/ч`;
         maxSpeedField.innerHTML = `max speed: ${maxSpeed}км/ч`;
@@ -176,10 +224,12 @@ document.body.addEventListener('keyup', (e) => {
 })
 
 document.body.addEventListener('focusin', (e) => {
+    console.log('focus in');
     changeFocusField(e.target, 'focus');
 });
 
 document.body.addEventListener('focusout', (e) => {
+    console.log('focus out');
     activeField = false;
 });
 
@@ -264,20 +314,8 @@ if ( 'Gyroscope' in window ) {
 
         }
 
-        
-
-        /*if (Math.abs(Math.abs(currentPosition) - Math.abs(previousPosition)) < 0.10 || 
-        Math.abs(currentPosition < 1)) {
-            previousPosition = currentPosition;
-
-        } else*/ if( currentPosition > 0 && currentPosition > 1 ) {
-            /*if( direction.bottomDirection ) {
-                direction.bottomDirection = false;
-                direction.movementReverse = 'reverse';
-            } else {
-                direction.topDirection = true;
-                directionGyro.innerHTML = 'движение к себе';
-            }*/
+        if ( currentPosition > 0 && currentPosition > 1 ) {
+            
             if(direction.bottomDirection) {
                 direction.bottomDirection = false;
                 direction.movementReverse = 'reverse';
@@ -288,14 +326,7 @@ if ( 'Gyroscope' in window ) {
             
             
         } else if ( currentPosition < 0 && currentPosition < -1 ) {
-            /* проблемы с этим условием,, не орабоатет*/
-            /*if ( direction.topDirection ) {
-                direction.topDirection = false;
-                direction.movementReverse = 'reverse';
-            } else {
-                direction.bottomDirection = true;
-                directionGyro.innerHTML = 'движение от себя';
-            }*/
+            
             if( direction.topDirection ) {
                 direction.topDirection = false;
                 direction.movementReverse = 'reverse';
@@ -303,7 +334,6 @@ if ( 'Gyroscope' in window ) {
             direction.bottomDirection = true;
             directionGyro.innerHTML = 'движение от себя';
             previousPosition = currentPosition;
-            
         }
 
         statusDirection.innerHTML = `top direction: ${direction.topDirection},
