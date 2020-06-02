@@ -148,7 +148,6 @@ if('LinearAccelerationSensor' in window) {
                     direction.movementReverse = 'reverse';
                 }
                 direction.rightDirection = true;
-                directionGyro.innerHTML = 'движение к себе';
                 previousPosition = currentPosition;
                 
                 
@@ -159,7 +158,6 @@ if('LinearAccelerationSensor' in window) {
                     direction.movementReverse = 'reverse';
                 }
                 direction.leftmDirection = true;
-                directionGyro.innerHTML = 'движение от себя';
                 previousPosition = currentPosition;
             }
         }
