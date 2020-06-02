@@ -8,12 +8,17 @@ let degree;
 
 let statusAcce = document.getElementById('accelerometr');
 let statusSide = document.getElementById('statusSide');
-/*const history = window.history;
+const history = window.history;
 let goBack = document.getElementById('goBack');
+let go = document.getElementById('go');
 
 goBack.addEventListener('click', (e) => {
     history.go(-1);
-});*/
+});
+
+go.addEventListener('click', (e) => {
+    history.go(1);
+});
 
 /*let statusInput = document.getElementById('statusInput');*/
 
@@ -93,7 +98,7 @@ if('Accelerometer' in window) {
         }
     });
     AcceSensor.start();
-}else {
+} else {
     console.log('dont have acceleration sensor');
 }
 
@@ -116,6 +121,7 @@ if('LinearAccelerationSensor' in window) {
     }
 
     let history = window.history;
+    let directionLinear = document.getElementById('directionLinear');
 
 
     let linearAcceleration = new LinearAccelerationSensor();
@@ -130,10 +136,12 @@ if('LinearAccelerationSensor' in window) {
         if( Math.abs(currentPosition) < 1 && direction.movementReverse == 'reverse') {
             if( direction.rightDirection ) {
                 /*moveField.innerHTML = 'переместить фокус на предыдущее поле';*/
+                directionLinear.innerHTML = 'Перейта на следующую страницу';
                 history.go(1);
                 direction.movementReverse = '';
             } else {
                 /*moveField.innerHTML = 'переместить фокус на следующее поле';*/
+                directionLinear.innerHTML = 'Перейта на предыдущую страницу'
                 history.back();
                 direction.movementReverse = '';
             }
