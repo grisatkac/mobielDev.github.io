@@ -105,8 +105,9 @@ if('LinearAccelerationSensor' in window) {
         return (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2))*1000/3600).toFixed(5);
     }
 
-    let maxSpeed = 0;
-    let currentSpeed = 0;
+    let maxSpeed = 0,
+        currentSpeed = 0,
+        currentPosition = 0;
 
     let direction = {
         movementReverse: false, //reverse/false
