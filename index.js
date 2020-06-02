@@ -8,12 +8,12 @@ let degree;
 
 let statusAcce = document.getElementById('accelerometr');
 let statusSide = document.getElementById('statusSide');
-const history = window.history;
+/*const history = window.history;
 let goBack = document.getElementById('goBack');
 
 goBack.addEventListener('click', (e) => {
     history.go(-1);
-});
+});*/
 
 /*let statusInput = document.getElementById('statusInput');*/
 
@@ -143,22 +143,22 @@ if('LinearAccelerationSensor' in window) {
         if ( !activeField ) {
             if ( currentPosition > 0 && currentPosition > 1 ) {
             
-                if(direction.bottomDirection) {
-                    direction.bottomDirection = false;
+                if(direction.leftDirection) {
+                    direction.leftDirection = false;
                     direction.movementReverse = 'reverse';
                 }
-                direction.topDirection = true;
+                direction.rightDirection = true;
                 directionGyro.innerHTML = 'движение к себе';
                 previousPosition = currentPosition;
                 
                 
             } else if ( currentPosition < 0 && currentPosition < -1 ) {
                 
-                if( direction.topDirection ) {
-                    direction.topDirection = false;
+                if( direction.rightDirection ) {
+                    direction.rightDirection = false;
                     direction.movementReverse = 'reverse';
                 }
-                direction.bottomDirection = true;
+                direction.leftmDirection = true;
                 directionGyro.innerHTML = 'движение от себя';
                 previousPosition = currentPosition;
             }
