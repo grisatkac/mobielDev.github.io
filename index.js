@@ -133,7 +133,7 @@ if('LinearAccelerationSensor' in window) {
         }
         /* calculate speed */
         currentPosition = e.target.x;
-        if( Math.abs(currentPosition) < 1 && direction.movementReverse == 'reverse') {
+        if( Math.abs(currentPosition) < 0.5 && direction.movementReverse == 'reverse') {
             if( direction.rightDirection ) {
                 /*moveField.innerHTML = 'переместить фокус на предыдущее поле';*/
                 directionLinear.innerHTML = 'Перейта на следующую страницу';
