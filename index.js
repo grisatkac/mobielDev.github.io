@@ -137,12 +137,12 @@ if('LinearAccelerationSensor' in window) {
             if( direction.rightDirection ) {
                 /*moveField.innerHTML = 'переместить фокус на предыдущее поле';*/
                 directionLinear.innerHTML = 'Перейта на следующую страницу';
-                history.go(1);
+                /*history.go(1);*/
                 direction.movementReverse = '';
             } else {
                 /*moveField.innerHTML = 'переместить фокус на следующее поле';*/
                 directionLinear.innerHTML = 'Перейта на предыдущую страницу'
-                history.back();
+                /*history.back();*/
                 direction.movementReverse = '';
             }
 
