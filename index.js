@@ -119,7 +119,6 @@ if('LinearAccelerationSensor' in window) {
             }
         }
 
-
         if ( !activeField ) {
             if ( currentPosition > 0 && currentPosition > 1 ) {
             
@@ -153,7 +152,7 @@ if('LinearAccelerationSensor' in window) {
 
 
 let activeField = false,
-    allFiedls = Object.values(document.querySelectorAll('input')),
+    allFiedls = Object.values(document.querySelectorAll('input'));
 
 const changeFocusField = (el, event) => {
     if( event == 'change' ) {
